@@ -1,33 +1,22 @@
 package ee.coffee.coffeeshop.controllers;
 
 import ee.coffee.coffeeshop.models.Product;
-import org.springframework.ui.Model;
 import ee.coffee.coffeeshop.services.ProductService;
+
+import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
+import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
-
-
-
-    public static void main(String[] args) throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "admin");
-        System.out.println("Connected");
-    }
-
-
-
 
     private final ProductService productService;
 
@@ -59,4 +48,5 @@ public class ProductController {
        productService.deleteProduct(id);
         return "redirect:/";
     }
+
 }

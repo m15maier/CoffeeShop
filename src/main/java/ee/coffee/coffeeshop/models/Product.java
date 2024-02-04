@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @Table(name= "products")
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,8 +26,12 @@ public class Product {
     @Column(name = "size")
     private String size;
 
+    @Column(name = "imageEntity")
+    private String imageEntity;
+
     @Column(name = "price")
     private int price;
+
 }
 
 
