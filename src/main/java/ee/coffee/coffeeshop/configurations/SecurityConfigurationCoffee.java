@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 @Component
 @Repository
 @Service
-public class SecurityConfig extends WebSecurityConfiguration {
+public class SecurityConfigurationCoffee extends WebSecurityConfiguration {
 //    private final CustomUserDetailsService userDetailsService;
 
 
