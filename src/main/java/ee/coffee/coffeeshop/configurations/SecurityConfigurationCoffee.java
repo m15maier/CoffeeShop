@@ -1,6 +1,6 @@
 package ee.coffee.coffeeshop.configurations;
 
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -16,17 +16,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
+
 
 @EntityScan("ee.coffee.*")
 @EnableWebSecurity
-@RequiredArgsConstructor
 @Configuration
-@Component
-@Repository
-@Service
 public class SecurityConfigurationCoffee extends WebSecurityConfiguration {
 //    private final CustomUserDetailsService userDetailsService;
 
