@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import ee.coffee.coffeeshop.models.enums.Role;
 import lombok.Data;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,7 +15,7 @@ import java.util.Set;
 
 
 
-@Entity
+@EntityScan("ee.coffee.*")
 @Table(name = "users")
 @Data
 

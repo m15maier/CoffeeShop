@@ -1,58 +1,97 @@
 package ee.coffee.coffeeshop.configurations;
 
-import ee.coffee.coffeeshop.services.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
+@EntityScan("ee.coffee.*")
 @EnableWebSecurity
 @RequiredArgsConstructor
+@Configuration
+@Component
+@Repository
+@Service
 public class SecurityConfig extends WebSecurityConfiguration {
-
-    private final CustomUserDetailsService userDetailsService;
-
-
-@Bean
-public DefaultSecurityFilterChain configure(HttpSecurity http) throws Exception {
-    http
-             .authorizeHttpRequests((requests) -> requests
-             .requestMatchers("/", "/product/**", "/registration", "/login").permitAll()
-             .anyRequest().authenticated()
-             )
-              .formLogin((form) -> form
-              .loginPage("/login")
-              .permitAll()
-              )
-              .logout((logout) -> logout.permitAll());
-
-      return http.build();
-  }
-
- @Bean
- public UserDetailsService configure() {
-    UserDetails user =
-             User.withDefaultPasswordEncoder()
-                      .username("user")
-                      .password("password")
-                      .roles("USER")
-                      .build();
-
-      return new InMemoryUserDetailsManager(user);
-  }
+//    private final CustomUserDetailsService userDetailsService;
 
 
+    @Autowired
+    @Scope("singleton")
+    public SecurityFilterChain customFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/", "/product/**", "/registration").permitAll()
+                        .anyRequest().authenticated()
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder(8);
-  }
+                )
+                .formLogin((form) -> form
+                        .loginPage("/login")
+                        .permitAll()
+
+                )
+                .logout(LogoutConfigurer::permitAll);
+
+        return http.build();
+    }
+
+    @Bean
+    public InMemoryUserDetailsManager userDetailsService() {
+        UserDetails user = User.builder().username("user")
+                .password(passwordEncoder().encode("password"))
+                .roles("USER")
+                .build();
+        return new InMemoryUserDetailsManager(user);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(8);
+    }
+
 }
+
+
+
+
+//
+//    private static final String ENCODED_PASSWORD = "$2a$10$AIUufK8g6EFhBcumRRV2L.AQNz3Bjp7oDQVFiO5JJMBFZQ6x2/R/2";
+//
+//    @Bean
+//    @Description("In memory User details service registered since DB doesn't have user table ")
+//    public UserDetailsService users() {
+//        // The builder will ensure the passwords are encoded before saving in memory
+//        UserDetails user = User.builder()
+//                .username("user")
+//                .password("password")
+//                .roles("USER")
+//                .build();
+//        UserDetails admin = User.builder()
+//                .username("user")
+//                .password("password")
+//                .roles("USER", "ADMIN")
+//                .build();
+//        return new InMemoryUserDetailsManager(user, admin);
+//    }
+//
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+//}
+//

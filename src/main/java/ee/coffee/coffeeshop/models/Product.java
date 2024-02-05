@@ -4,9 +4,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @Data
-@Entity
+@EntityScan("ee.coffee.*")
 @Table(name= "products")
 @AllArgsConstructor
 @NoArgsConstructor
