@@ -1,16 +1,13 @@
 package ee.coffee.coffeeshop.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@Data
-@EntityScan("ee.coffee.*")
+import java.time.LocalDateTime;
+
 @Table(name= "products")
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
+@Data
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,11 +24,15 @@ public class Product {
     @Column(name = "size")
     private String size;
 
-    @Column(name = "imageEntity")
-    private String imageEntity;
-
     @Column(name = "price")
     private int price;
+
+
+    private LocalDateTime dateOfCreated;
+    @PrePersist
+    private void init() {
+        dateOfCreated = LocalDateTime.now();
+    }
 
 }
 

@@ -1,10 +1,8 @@
 package ee.coffee.coffeeshop.models;
 
-import javax.persistence.*;
-
 import ee.coffee.coffeeshop.models.enums.Role;
+import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,12 +11,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-
-
-@EntityScan("ee.coffee.*")
 @Table(name = "users")
 @Data
-
+@Entity
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

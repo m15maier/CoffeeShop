@@ -3,16 +3,12 @@ package ee.coffee.coffeeshop.controllers;
 import ee.coffee.coffeeshop.models.Product;
 import ee.coffee.coffeeshop.services.ProductService;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@EntityScan("ee.coffee.*")
+
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
@@ -42,7 +38,7 @@ public class ProductController {
 
     }
 
-    @PostMapping("/product/delete/{id}")
+    @DeleteMapping("/product/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
        productService.deleteProduct(id);
         return "redirect:/";
