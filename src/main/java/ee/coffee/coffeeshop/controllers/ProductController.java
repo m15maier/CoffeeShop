@@ -15,27 +15,27 @@ public class ProductController {
     private final ProductService productService;
 
 
-    @GetMapping("/")
+    @GetMapping(value ="/")
     public String products(@RequestParam(name = "title", required = false) String title, Model model) {
         model.addAttribute("products", productService.listProducts(title));
         return "products";
     }
 
 
-    @GetMapping("/products/{id}")
+    @GetMapping(value = "/products/{id}")
     public String productInfo(@PathVariable Long id, Model model) {
         model.addAttribute("product", productService.getProductById(id));
         return "product-info";
     }
 
-    @PostMapping("/products/create")
+    @PostMapping(value ="/products/create")
     public String createProduct(Product product) {
         productService.saveProduct(product);
         return "redirect:/";
 
     }
 
-    @DeleteMapping("/products/delete/{id}")
+    @DeleteMapping(value = "/products/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
        productService.deleteProduct(id);
         return "redirect:/";
