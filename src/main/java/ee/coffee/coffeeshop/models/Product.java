@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     @Column(name = "id")
     private Long id;
 
@@ -39,5 +38,3 @@ public class Product {
     }
 
 }
-
-

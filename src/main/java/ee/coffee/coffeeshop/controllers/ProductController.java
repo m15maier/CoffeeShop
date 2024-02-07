@@ -2,21 +2,17 @@ package ee.coffee.coffeeshop.controllers;
 
 import ee.coffee.coffeeshop.models.Product;
 import ee.coffee.coffeeshop.services.ProductService;
-
 import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
-@Controller
+@RestController
 @RequiredArgsConstructor
-@RequestMapping("/Product")
+@RequestMapping
 public class ProductController {
 
     private final ProductService productService;
-
-
 
 
     @GetMapping("/")
@@ -26,20 +22,20 @@ public class ProductController {
     }
 
 
-    @GetMapping("/product/{id}")
+    @GetMapping("/products/{id}")
     public String productInfo(@PathVariable Long id, Model model) {
         model.addAttribute("product", productService.getProductById(id));
         return "product-info";
     }
 
-    @PostMapping("/product/create")
+    @PostMapping("/products/create")
     public String createProduct(Product product) {
         productService.saveProduct(product);
         return "redirect:/";
 
     }
 
-    @DeleteMapping("/product/delete/{id}")
+    @DeleteMapping("/products/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
        productService.deleteProduct(id);
         return "redirect:/";
