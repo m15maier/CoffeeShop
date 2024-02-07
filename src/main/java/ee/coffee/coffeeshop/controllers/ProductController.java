@@ -2,12 +2,13 @@ package ee.coffee.coffeeshop.controllers;
 
 import ee.coffee.coffeeshop.models.Product;
 import ee.coffee.coffeeshop.services.ProductService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping
 public class ProductController {
