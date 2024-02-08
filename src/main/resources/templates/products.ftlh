@@ -1,20 +1,41 @@
 <!DOCTYPE html>
-<html lang="ENG">
+<html lang="ENG" xmlns:form="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Coffee shop</title>
 </head>
 
 <body>
-<h3>Login | <a href="/login"> Log in </a> </h3><hr>
-<h3>Registration | <a href="/registration"> Registration </a> </h3><hr>
 
-<form action="/products" method="get">
-    Search by title: <input type="text" name="title" /><br>
-    <input type="submit" value="Search" />
+
+<h1>All products</h1>
+
+
+<#--<#if user.email??>-->
+<#--    <h3>Hello <i>${user.name}</i></h3>-->
+<#--    <form action="/logout" method="post">-->
+<#--        <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />-->
+<#--    <input type="submit" value="Log out" /><br><br><br>-->
+<#--    </form>-->
+<#--<#else>-->
+<#--    <a href="/login"> Log in</a>-->
+<#--</#if>-->
+<#--<hr>-->
+
+<h4> <a href="/login"> Log in </a> </h4>
+<h4> <a href="/registration"> Registration </a> </h4> <br><br>
+
+<a href="/admin"> Admin Panel      </a>
+<a href="/cart"> Cart </a> <br><br>
+
+<form action="/products">
+    Search by title: <label>
+        <input type="text" name="title" >
+    </label>
+    <input type="submit" value="Search" /><br><br><br>
 </form>
 
-
-
+<h3>All products:</h3><hr>
 <#list products as product>
     <div>
         <p><b>${product.title}</b> ${product.price}€ | <a href="/products/${product.id}"> Read more...</a></p>
@@ -24,22 +45,31 @@
 </#list>
 <hr>
 
-
+<#--<#if user.email??>-->
 
 <h1> Create new item </h1>
 
 <form action="/products/create" method="post" enctype="multipart/form-data">
-    ID: <input type="text" name="id" /><br><br>
-    Title: <input type="text" name="title" /><br><br>
-    Description: <input type="text" name="description" /><br><br>
-    Size: <input type="text" name="size" /><br><br>
-    Price: <input type="number" name="price" /><br><br>
-    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+    ID: <label>
+        <input type="text" name="id"/>
+    </label><br><br>
+    Title: <label>
+        <input type="text" name="title"/>
+    </label><br><br>
+    Description: <label>
+        <input type="text" name="description"/>
+    </label><br><br>
+    Size: <label>
+        <input type="text" name="size"/>
+    </label><br><br>
+    Price: <label>
+        <input type="number" name="price"/>
+    </label><br><br>
+    <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />
     <input type="submit" value="Add item" />
 
-
-
-
 </form>
+<#--</#if>-->
+
 </body>
 </html>

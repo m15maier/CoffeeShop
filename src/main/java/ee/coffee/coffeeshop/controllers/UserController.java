@@ -1,22 +1,20 @@
 package ee.coffee.coffeeshop.controllers;
 
 import ee.coffee.coffeeshop.models.User;
+import ee.coffee.coffeeshop.models.enums.Role;
 import ee.coffee.coffeeshop.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping
 public class UserController {
 
     private final UserService userService;
 
-
-    @GetMapping(value = "/login")
+    @GetMapping("/login")
     public String login() {
         return "login";
     }
@@ -28,13 +26,19 @@ public class UserController {
 
 
     @PostMapping(value = "/registration")
-    public String createUser(User user) {
-        userService.createUser(user);
+    public String createUser(User user, Model model) {
+        if (!userService.createUser(user)) {
+            model.addAttribute("errorMessage", "User with this email: " + user.getEmail() + " already exists");
+            return "registration";
+        }
         return "redirect:/login";
     }
 
-    @GetMapping(value = "/hello")
-    public String securityUrl() {
-        return "hello";
+    @GetMapping("/user/{user}")
+    public String userInfo(@PathVariable("user") User user, Model model) {
+            model.addAttribute("user", user);
+            model.addAttribute("products", user.getProducts());
+            model.addAttribute("roles", Role.values());
+        return "user-info";
     }
 }
