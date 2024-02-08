@@ -5,12 +5,12 @@
 </head>
 
 <body>
-<h3>Login | <a href="/login"> Log in </a> </h3><hr>
-<h3>Registration | <a href="/registration"> Registration </a> </h3><hr>
+<h4> <a href="/login"> Log in </a> </h4>
+<h4> <a href="/registration"> Registration </a> </h4><br><br>
 
 <form action="/products" method="get">
-    Search by title: <input type="text" name="title" /><br>
-    <input type="submit" value="Search" />
+    Search by title: <input type="text" name="title" />
+    <input type="submit" value="Search" /><br><br><br>
 </form>
 
 
@@ -34,7 +34,7 @@
     Description: <input type="text" name="description" /><br><br>
     Size: <input type="text" name="size" /><br><br>
     Price: <input type="number" name="price" /><br><br>
-    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+<#--    <input type="hidden" name="_csrf" value="${_csrf.token}" />-->
     <input type="submit" value="Add item" />
 
 

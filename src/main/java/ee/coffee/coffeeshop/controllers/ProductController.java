@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping
+//@RequestMapping
 public class ProductController {
 
     private final ProductService productService;
 
 
-    @GetMapping(value ="/")
+    @GetMapping(value = "/")
     public String products(@RequestParam(name = "title", required = false) String title, Model model) {
         model.addAttribute("products", productService.listProducts(title));
         return "products";
@@ -29,7 +29,7 @@ public class ProductController {
         return "product-info";
     }
 
-    @PostMapping(value ="/products/create")
+    @PostMapping(value = "/products/create")
     public String createProduct(Product product) {
         productService.saveProduct(product);
         return "redirect:/";

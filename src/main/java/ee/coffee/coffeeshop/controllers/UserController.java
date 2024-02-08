@@ -3,14 +3,14 @@ package ee.coffee.coffeeshop.controllers;
 import ee.coffee.coffeeshop.models.User;
 import ee.coffee.coffeeshop.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping
+//@Primary
 public class UserController {
 
     private final UserService userService;
@@ -20,6 +20,7 @@ public class UserController {
     public String login() {
         return "login";
     }
+
 
     @GetMapping(value = "/registration")
     public String registration() {

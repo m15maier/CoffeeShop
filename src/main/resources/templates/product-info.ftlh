@@ -15,10 +15,13 @@
 
 
 <form action="/products/delete/${product.id}" method="post">
-    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+<#--    <input type="hidden" name="_csrf" value="${_csrf.token}" />-->
     <input type="submit" value="Delete item" />
 
 
 </form>
+
+<h4> <-- <a href="/"> Back </a> </h4><hr>
+
 </body>
 </html>
