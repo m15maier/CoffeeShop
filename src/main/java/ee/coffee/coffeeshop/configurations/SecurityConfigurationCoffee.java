@@ -3,6 +3,7 @@ package ee.coffee.coffeeshop.configurations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -27,7 +28,11 @@ public class SecurityConfigurationCoffee {
 //                    requests.requestMatchers("/login/**");
                     requests.anyRequest().permitAll();
                 })
-                .formLogin(formLogin -> formLogin.disable());
+                .formLogin(form -> form
+                                .loginPage("/login")
+                                .permitAll());
+//                .formLogin(Customizer.withDefaults());
+//                .formLogin(formLogin -> formLogin.disable());
 //                .httpBasic(httpBasic -> httpBasic.init(http));
 
         return http.build();

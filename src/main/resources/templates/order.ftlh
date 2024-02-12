@@ -7,29 +7,13 @@
 
 <body>
 
-
-<h1>All products</h1>
-
-
-<#--<#if user.email??>-->
-<#--    <h3>Hello <i>${user.name}</i></h3>-->
-<#--    <form action="/logout" method="post">-->
-<#--        <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />-->
-<#--    <input type="submit" value="Log out" /><br><br><br>-->
-<#--    </form>-->
-<#--<#else>-->
-<#--    <a href="/login"> Log in</a>-->
-<#--</#if>-->
-<#--<hr>-->
+<h1>Order</h1>
 
 <h4> <a href="/login"> Log in </a> </h4>
 <h4> <a href="/registration"> Registration </a> </h4> <br><br>
 
-<div> <a href="/admin"> Admin Panel       .</a>
-<a href="/cart"> Cart        .</a>
-<a href="/order"> Order       .</a></div>
-
-<hr>
+<a href="/admin"> Admin Panel      </a>
+<a href="/cart"> Cart </a> <br><br>
 
 <form action="/products">
     Search by title: <label>
@@ -43,7 +27,7 @@
     <div>
         <p><b>${product.title}</b> ${product.price}€ | <a href="/products/${product.id}"> Read more...</a></p>
     </div>
-    <#else>
+<#else>
     <h3>No items</h3>
 </#list>
 <hr>
