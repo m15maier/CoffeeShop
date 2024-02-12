@@ -5,31 +5,28 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "cart")
+import java.util.Collection;
+
+@Table(name = "orders")
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cart_id")
-    private Integer cart_id;
+    @Column(name = "order_id")
+    private Integer order_id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "order_price", nullable = false)
+    private Integer order_price;
 
-    @Column(name = "quantity")
-    private Integer quantity;
-
-    @Column(name = "price")
-    private Integer price;
 
     @ManyToOne
     private User user;
 
-    @ManyToOne
-    private Order order;
+    @OneToMany(mappedBy = "order")
+    private Collection<Cart> carts;
+
+
 }
-
-
