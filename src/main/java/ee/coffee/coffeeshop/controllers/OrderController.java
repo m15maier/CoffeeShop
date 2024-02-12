@@ -1,7 +1,7 @@
 package ee.coffee.coffeeshop.controllers;
 
 import ee.coffee.coffeeshop.models.Order;
-import ee.coffee.coffeeshop.services.OrderService;
+import ee.coffee.coffeeshop.services.impl.OrderServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
 
-    private final OrderService orderService;
+    private final OrderServiceImpl orderService;
 
         @GetMapping(value = "/order")
         public ResponseEntity<List<Order>> findAllOrder() {

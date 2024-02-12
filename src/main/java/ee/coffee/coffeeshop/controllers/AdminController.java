@@ -2,9 +2,8 @@ package ee.coffee.coffeeshop.controllers;
 
 import ee.coffee.coffeeshop.models.enums.Role;
 import ee.coffee.coffeeshop.models.User;
-import ee.coffee.coffeeshop.services.UserService;
+import ee.coffee.coffeeshop.services.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 //@PreAuthorize(value = "hasAuthority('ADMIN')")
 public class AdminController {
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @GetMapping("/admin")
     public String admin(Model model) {

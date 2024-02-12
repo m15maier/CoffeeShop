@@ -1,24 +1,21 @@
 package ee.coffee.coffeeshop.controllers;
 
 import ee.coffee.coffeeshop.models.Product;
-import ee.coffee.coffeeshop.services.ProductService;
-import org.springframework.http.HttpStatus;
+import ee.coffee.coffeeshop.services.impl.ProductServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Map;
 
 
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductServiceImpl productService;
 
 
     @GetMapping(value = "/")

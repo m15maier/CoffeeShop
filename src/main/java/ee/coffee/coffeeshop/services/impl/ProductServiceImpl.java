@@ -1,4 +1,4 @@
-package ee.coffee.coffeeshop.services;
+package ee.coffee.coffeeshop.services.impl;
 
 import ee.coffee.coffeeshop.models.Product;
 import ee.coffee.coffeeshop.models.User;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ProductService {
+public class ProductServiceImpl {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
@@ -29,7 +29,7 @@ public class ProductService {
         product.setUser(getUserByPrincipal(principal));
 
         log.info("Saving new Product. Title: {}; Author email: {}", product.getTitle(),product.getUser().getEmail());
-        
+
         productRepository.save(product);
     }
 

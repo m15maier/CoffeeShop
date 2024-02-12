@@ -1,54 +1,64 @@
-package ee.coffee.coffeeshop.services;
+package ee.coffee.coffeeshop.services.impl;
 
 import ee.coffee.coffeeshop.models.Cart;
+import ee.coffee.coffeeshop.models.User;
 import ee.coffee.coffeeshop.repositories.CartRepository;
+import ee.coffee.coffeeshop.services.interfaces.CartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class CartService {
+public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
 
-    @Bean
+    @Override
     public List<Cart> getAllCart() {
         return cartRepository.findAll();
     }
 
-    @Bean
+    @Override
+    public Collection<Cart> getAllByUsers(User user) {
+        return null;
+    }
+
+    @Override
+    public void save(Cart cart) {
+
+    }
+
+    @Override
     public List<Cart> getAllCartItems() {
         return cartRepository.findAll();
     }
 
-
+    @Override
     public Cart getById(Integer id) {
         Optional<Cart> optional = cartRepository.findById(id);
         return optional.orElse(null);
     }
 
-
-    public void saveCart(Cart cart) throws IOException {
+    @Override
+    public void saveCart(Cart cart) {
         if (cart == null) {
             return;
         }
         cartRepository.save(cart);
     }
 
-
+    @Override
     public void deleteById(Integer id) {
         if (cartRepository.existsById(id)) {
             cartRepository.deleteById(id);
         }
     }
-
+    @Override
     public void update(Integer id, Cart cart) {
         Optional<Cart> persistCartItemOptional = cartRepository.findById(id);
         if (persistCartItemOptional.isPresent()) {

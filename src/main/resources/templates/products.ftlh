@@ -29,7 +29,7 @@
 <a href="/cart"> Cart        .</a>
 <a href="/order"> Order       .</a></div>
 
-<hr>
+<br><br>
 
 <form action="/products">
     Search by title: <label>

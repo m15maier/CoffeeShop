@@ -1,7 +1,7 @@
 package ee.coffee.coffeeshop.controllers;
 
 import ee.coffee.coffeeshop.models.Cart;
-import ee.coffee.coffeeshop.services.CartService;
+import ee.coffee.coffeeshop.services.impl.CartServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class CartController {
 
-    private final CartService cartService;
+    private final CartServiceImpl cartService;
 
     @GetMapping(value = "/cart")
     public ResponseEntity<List<Cart>> getAllCart() {

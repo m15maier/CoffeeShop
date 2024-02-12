@@ -1,4 +1,4 @@
-package ee.coffee.coffeeshop.services;
+package ee.coffee.coffeeshop.services.impl;
 
 import ee.coffee.coffeeshop.models.Order;
 import ee.coffee.coffeeshop.repositories.OrderRepository;
@@ -12,9 +12,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class OrderService {
+public class OrderServiceImpl {
     private final OrderRepository orderRepository;
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     public Order getById(Integer order_id) {
         Optional<Object> optional = Optional.of(orderRepository.findById(order_id));

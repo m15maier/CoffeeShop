@@ -1,4 +1,4 @@
-package ee.coffee.coffeeshop.services;
+package ee.coffee.coffeeshop.services.impl;
 
 import ee.coffee.coffeeshop.models.User;
 import ee.coffee.coffeeshop.models.enums.Role;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class UserService {
+public class UserServiceImpl {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
