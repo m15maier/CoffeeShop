@@ -19,6 +19,5 @@ public interface UserService {
 
     boolean createUser(User user);
 
-//    void saveUser(String name, String email, String password, String address, String phone);
 
 }

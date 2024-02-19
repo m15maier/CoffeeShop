@@ -1,6 +1,5 @@
 package ee.coffee.coffeeshop.controllers;
 
-import ee.coffee.coffeeshop.entity.Product;
 import ee.coffee.coffeeshop.entity.User;
 import ee.coffee.coffeeshop.services.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
@@ -19,12 +17,12 @@ import java.security.Principal;
 public class LoginController {
     private final UserService userService;
 
-//    @GetMapping(value = "/")
-//    public String products(@RequestParam(name = "title", required = false) String title, Principal principal, Model model) {
+    @GetMapping(value = "/")
+    public String homePage(@RequestParam(name = "title", required = false) String title, Principal principal, Model model) {
 //        model.addAttribute("products", Product("title");
 //        model.addAttribute("user", productService.getUserByPrincipal(principal));
-//        return "products";
-//    }
+        return "home";
+    }
     @GetMapping("/login")
     public String login() {
         return "login";
