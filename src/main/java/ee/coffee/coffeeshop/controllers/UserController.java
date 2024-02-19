@@ -5,6 +5,8 @@ import ee.coffee.coffeeshop.entity.Security;
 import ee.coffee.coffeeshop.entity.User;
 import ee.coffee.coffeeshop.services.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -37,7 +39,7 @@ public class UserController {
 
 
     // только с ролью админа
-
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "admin/user/get_all_users")
     public List<User> getAllUsers() {
         return userService.getAllUsers();

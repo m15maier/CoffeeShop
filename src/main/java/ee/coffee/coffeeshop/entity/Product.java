@@ -12,7 +12,9 @@ import lombok.NoArgsConstructor;
 @Entity     // сущность jpa
 @AllArgsConstructor     // конструктор со всеми полями
 @NoArgsConstructor      //конструктор без аргументов
+
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "product_id")
