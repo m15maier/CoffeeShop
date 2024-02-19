@@ -1,17 +1,15 @@
-package ee.coffee.coffeeshop.models;
+package ee.coffee.coffeeshop.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Collection;
-
-@Table(name = "delivery")
-@Data
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "delivery")       // таблица
+@Data       // getter + setter + required args + to string + equals
+@Entity     // сущность jpa
+@AllArgsConstructor     // конструктор со всеми полями
+@NoArgsConstructor      //конструктор без аргументов
 public class Delivery {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

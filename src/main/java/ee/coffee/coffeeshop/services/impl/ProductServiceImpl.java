@@ -1,50 +1,67 @@
 package ee.coffee.coffeeshop.services.impl;
 
-import ee.coffee.coffeeshop.models.Product;
-import ee.coffee.coffeeshop.models.User;
+import ee.coffee.coffeeshop.entity.Product;
+import ee.coffee.coffeeshop.enums.ProductStatus;
 import ee.coffee.coffeeshop.repositories.ProductRepository;
-import ee.coffee.coffeeshop.repositories.UserRepository;
+import ee.coffee.coffeeshop.services.interfaces.ProductService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ProductServiceImpl {
-    private final ProductRepository productRepository;
-    private final UserRepository userRepository;
+public class ProductServiceImpl implements ProductService {
 
-    public List<Product> listProducts(String title) {
-        if (title != null) return productRepository.findByTitle(title);
-        return productRepository.findAll();
+    private final ProductRepository productRepository;
+
+
+    @Override
+    public Product getProductById(Integer id) {
+        Optional<Product> optional = productRepository.findById(id);
+        if (optional.isPresent()) {
+            return optional.get();
+        } else {
+            throw new EntityNotFoundException("product " + id + " not found");
+        }
     }
 
-
-    public void saveProduct(Principal principal, Product product) throws IOException {
-        product.setUser(getUserByPrincipal(principal));
-
-        log.info("Saving new Product. Title: {}; Author email: {}", product.getTitle(),product.getUser().getEmail());
-
+    @Override
+    public void saveProduct(Product product) {
         productRepository.save(product);
     }
 
-    public User getUserByPrincipal(Principal principal) {
-        if (principal == null) return new User();
-        return userRepository.findByEmail(principal.getName());
+    @Override
+    public void deleteProduct(Integer id) {
+    }
+
+    @Override
+    public void activeById(Integer id) {
+        Product product = getProductById(id);
+        if (product == null) {
+            return;
+        }
+        product.setStatus(ProductStatus.ACTIVE);
+        productRepository.save(product);
     }
 
 
-    public void deleteProduct(Long id) {
-        productRepository.deleteById(id);
+    @Override
+    public void inactiveById(Integer id) {
+        Product product = getProductById(id);
+        if (product == null) {
+            return;
+        }
+        product.setStatus(ProductStatus.INACTIVE);
+        productRepository.save(product);
     }
 
-
-    public Product getProductById(Long id) {
-        return productRepository.findById(id).orElse(null);
+    @Override
+    public List<Product> getListOfAllProducts() {
+        return null;
     }
 }

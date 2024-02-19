@@ -1,46 +1,53 @@
 package ee.coffee.coffeeshop.controllers;
 
-import ee.coffee.coffeeshop.models.Product;
-import ee.coffee.coffeeshop.services.impl.ProductServiceImpl;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import ee.coffee.coffeeshop.entity.Product;
+import ee.coffee.coffeeshop.services.interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.security.Principal;
+import java.util.List;
 
-
-@Controller
-@RequiredArgsConstructor
+@Controller     // создаётся контроллер и управляется спрингом
+@RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
 public class ProductController {
 
-    private final ProductServiceImpl productService;
-
-
-    @GetMapping(value = "/")
-    public String products(@RequestParam(name = "title", required = false) String title, Principal principal, Model model) {
-        model.addAttribute("products", productService.listProducts(title));
-        model.addAttribute("user", productService.getUserByPrincipal(principal));
-        return "products";
-    }
+    private final ProductService productService;
 
     @GetMapping(value = "/products/{id}")
-    public String productInfo(@PathVariable Long id, Model model) {
-        model.addAttribute("product", productService.getProductById(id));
-        return "product-info";
-    }
-
-    @PostMapping(value = "/products/create")
-    public String createProduct(Product product, Principal principal) throws IOException {
-        productService.saveProduct(principal, product);
-        return "redirect:/";
-
+    public Product productById(@PathVariable Integer id) {
+        Product product = productService.getProductById(id);
+        return product;
     }
 
     @DeleteMapping(value = "/products/delete/{id}")
-    public String deleteProduct(@PathVariable Long id) {
+    public String deleteProduct(@PathVariable Integer id) {
        productService.deleteProduct(id);
         return "redirect:/";
+    }
+
+// только с ролью админа
+    @PostMapping(value = "/admin/product/save")
+    public void saveProduct(@RequestBody Product product) {
+        System.out.println(product.getTitle());
+        productService.saveProduct(product);
+    }
+
+
+    @GetMapping(value = "/admin/product/active/{id}")
+    public void activeProduct (@PathVariable Integer id) {
+        productService.activeById(id);
+    }
+
+
+    @PutMapping(value = "/admin/product/inactive/{id}")
+    public void inactiveProduct (@PathVariable Integer id) {
+        productService.inactiveById(id);
+    }
+
+
+    @PutMapping(value = "/admin/product_list")
+    public List<Product> getProductList() {
+        return productService.getListOfAllProducts();
     }
 }

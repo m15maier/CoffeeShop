@@ -1,44 +1,67 @@
 package ee.coffee.coffeeshop.controllers;
 
-import ee.coffee.coffeeshop.models.User;
-import ee.coffee.coffeeshop.models.enums.Role;
-import ee.coffee.coffeeshop.services.impl.UserServiceImpl;
+import ee.coffee.coffeeshop.dto.UserDTO;
+import ee.coffee.coffeeshop.entity.Security;
+import ee.coffee.coffeeshop.entity.User;
+import ee.coffee.coffeeshop.enums.UserRole;
+import ee.coffee.coffeeshop.services.interfaces.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequiredArgsConstructor
+import java.util.List;
+
+@Controller     // создаётся контроллер и управляется спрингом
+@RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
 public class UserController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+
+    // получает идентификатор пользователя из объекта UserDetails
+    @GetMapping("/user/get")
+    public User getUser(@AuthenticationPrincipal UserDetails userDetails) { // Аннотация указывает на то, что нужно использовать текущего аутентифицированного пользователя в качестве значения параметра userDetails
+
+        Integer userId = ((Security) userDetails).getUserId();
+        User user = userService.getUserById(userId);
+        return user;
     }
 
-    @GetMapping(value = "/registration")
-    public String registration() {
-        return "registration";
+    // сохраняет нового пользователя и его данные
+    @PostMapping(value = "/user/add")
+    public void addNewUser(@RequestBody UserDTO userDTO) {   // Аннотация указывает на то, что объект UserDTO должен быть извлечен из тела запроса
+        User user = userService.saveUser(userDTO.getName(), userDTO.getEmail(), userDTO.getAddress(), userDTO.getPhone());
+        userService.saveSecurity(user.getUserId(), userDTO.getPassword(), user.getUser_email());
     }
 
 
-    @PostMapping(value = "/registration")
-    public String createUser(User user, Model model) {
-        if (!userService.createUser(user)) {
-            model.addAttribute("errorMessage", "User with this email: " + user.getEmail() + " already exists");
-            return "registration";
-        }
-        return "redirect:/login";
+
+
+
+
+
+
+    // только с ролью админа
+
+    @GetMapping(value = "/admin/user/{id}")
+    public User getUser(@PathVariable(value = "id") Integer id, HttpServletRequest request, @Param(value = "ADMIN") UserRole userRole) {
+        User user = userService.getUserById(id);
+        return user;
     }
 
-    @GetMapping("/user/{user}")
-    public String userInfo(@PathVariable("user") User user, Model model) {
-            model.addAttribute("user", user);
-            model.addAttribute("products", user.getProducts());
-            model.addAttribute("roles", Role.values());
-        return "user-info";
+
+    @GetMapping(value = "admin/user/get_all_users")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+
+    @GetMapping(value = "/admin/user/{id}/status/{status}")
+    public List<User> getUserByStatus(@PathVariable(name = "status") String status) {
+        return userService.getUserByStatus(status);
     }
 }

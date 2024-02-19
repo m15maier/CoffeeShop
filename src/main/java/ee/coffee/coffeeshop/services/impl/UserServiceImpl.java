@@ -1,68 +1,69 @@
 package ee.coffee.coffeeshop.services.impl;
 
-import ee.coffee.coffeeshop.models.User;
-import ee.coffee.coffeeshop.models.enums.Role;
+import ee.coffee.coffeeshop.entity.Security;
+import ee.coffee.coffeeshop.entity.User;
+import ee.coffee.coffeeshop.enums.UserRole;
+import ee.coffee.coffeeshop.repositories.SecurityRepository;
 import ee.coffee.coffeeshop.repositories.UserRepository;
+import ee.coffee.coffeeshop.services.interfaces.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class UserServiceImpl {
+public abstract class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final SecurityRepository securityRepository;
 
-        public boolean createUser(User user) {
-            String email = user.getEmail();
-            if (userRepository.findByEmail(email) !=null) return false;
-            user.setActive(true);
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.getRoles().add(Role.ROLE_USER);
-            log.info("Saving new User with email: {}", email);
-            userRepository.save(user);
-            return true;
+    @Transactional
+    @Override
+    public User saveUser(String name, String email, String address, String phone) {
 
-        }
-
-        public List<User> list() {
-            return userRepository.findAll();
-    }
-
-    public void banUser(Long id) {
-        User user = userRepository.findById(id).orElse(null);
-        if (user != null) {
-            if (user.isActive()) {
-                user.setActive(false);
-                log.info("Ban user with id = {}; email: {}", user.getId(), user.getEmail());
-            } else {
-                user.setActive(true);
-                log.info("Unban user with id = {}; email: {}", user.getId(), user.getEmail());
-            }
-        }
+        User user = new User();
+        user.setUser_name(name);
+        user.setUser_email(email);
+        user.setUser_address(address);
+        user.setUser_phone(phone);
         userRepository.save(user);
 
+        return user;
     }
 
-    public void changeUserRoles(User user, Map<String, String> form) {
-        Set<String> roles = Arrays.stream(Role.values())
-                .map(Role::name)
-                .collect(Collectors.toSet());
-        user.getRoles().clear();
-        for (String key : form.keySet()) {
-            if (roles.contains(key)) {
-                user.getRoles().add(Role.valueOf(key));
-            }
-        }
-        userRepository.save(user);
+    @Transactional
+    @Override
+        public void saveSecurity(Integer userId, String userEmail, String userPassword) {
+
+        Security security = new Security();
+        security.setUserId(userId);
+        security.setLogin(userEmail);
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String encodePassword = bCryptPasswordEncoder.encode(userPassword);
+        security.setPassword(encodePassword);
+
+        security.setRole(UserRole.USER);
+        securityRepository.save(security);
+
     }
+
+    @Transactional
+    @Override
+    public User getUserById (Integer user_id) {
+        Optional<User> optionalUser = userRepository.findById(user_id);
+        return optionalUser.orElse(null);
+
+    }
+
+    @Transactional
+    @Override
+        public List<User> getAllUsers() {
+        return userRepository.getAllUsers();
+    }
+
 }

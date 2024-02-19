@@ -1,74 +1,84 @@
 package ee.coffee.coffeeshop.services.impl;
 
-import ee.coffee.coffeeshop.models.Cart;
-import ee.coffee.coffeeshop.models.User;
+import ee.coffee.coffeeshop.entity.Cart;
+import ee.coffee.coffeeshop.entity.Product;
+import ee.coffee.coffeeshop.entity.User;
 import ee.coffee.coffeeshop.repositories.CartRepository;
+import ee.coffee.coffeeshop.repositories.ProductRepository;
+import ee.coffee.coffeeshop.repositories.UserRepository;
 import ee.coffee.coffeeshop.services.interfaces.CartService;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
-import java.util.Collection;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class CartServiceImpl implements CartService {
+public abstract class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
+    private final UserRepository userRepository;
+    private final ProductRepository productRepository;
 
+    // метод, который добавляет продукт в корзину пользователя
+    @Transactional
+    @Modifying
     @Override
-    public List<Cart> getAllCart() {
-        return cartRepository.findAll();
+   public void addProductToCart(Integer productId, Integer quantity, Integer userId) {
+        // метод принимает три параметра
+
+        Cart cartEntity = new Cart();   // создаётся новый продукт
+        cartEntity.setQuantity(quantity);   // устанавливается количество продукта в этой корзине
+
+        Optional<User> userOptional = userRepository.findById(userId);     // поиск пользователя по идентификатору
+        if (!userOptional.isPresent()) {    // если не найден, то выбрасывается исключение
+            throw new EntityNotFoundException("not found");
+    }
+        cartEntity.setUser(userOptional.get());
+
+
+        Optional<Product> productOptional = productRepository.findById(Integer.valueOf(productId));
+        if (!productOptional.isPresent()) {     // поиск продукта
+            throw new EntityNotFoundException("not found");     // если не найден, то выбрасывается исключение
+    }
+        cartEntity.setProducts(productOptional.get());   // Если пользователь и продукт найдены, то устанавливается пользователь и продукт для объекта Cart, после чего этот объект сохраняется в репозитории корзины cartRepository.
+        cartRepository.save(cartEntity);
     }
 
+    @Transactional
+    @Modifying
     @Override
-    public Collection<Cart> getAllByUsers(User user) {
-        return null;
+    public void deleteProductFromCart(Integer userId, Integer productId) {
+        Cart cartToDelete = CartRepository.getByQuantityAndUser_idAndProduct_id(userId, productId);
+        assert cartToDelete != null;
+        cartRepository.delete(cartToDelete);
     }
 
-    @Override
-    public void save(Cart cart) {
 
-    }
-
+    @Transactional
+    @Modifying
     @Override
-    public List<Cart> getAllCartItems() {
-        return cartRepository.findAll();
-    }
+    public void changeQuantity(Integer productId, Integer userId, Integer quantity) {
+        Cart cartChange = CartRepository.getByQuantityAndUser_idAndProduct_id(userId, productId);
 
-    @Override
-    public Cart getById(Integer id) {
-        Optional<Cart> optional = cartRepository.findById(id);
-        return optional.orElse(null);
-    }
-
-    @Override
-    public void saveCart(Cart cart) {
-        if (cart == null) {
-            return;
+        if (cartChange != null) {
+            cartChange.setQuantity(quantity);
+            cartRepository.save(cartChange);
+        } else {
+            throw new EntityNotFoundException("not found");
         }
-        cartRepository.save(cart);
     }
 
+    @Transactional
+    @Modifying
     @Override
-    public void deleteById(Integer id) {
-        if (cartRepository.existsById(id)) {
-            cartRepository.deleteById(id);
-        }
-    }
-    @Override
-    public void update(Integer id, Cart cart) {
-        Optional<Cart> persistCartItemOptional = cartRepository.findById(id);
-        if (persistCartItemOptional.isPresent()) {
-            Cart persistCart = persistCartItemOptional.get();
-            persistCart.setCart_id(cart.getCart_id());
-            persistCart.setName(cart.getName());
-            persistCart.setPrice(cart.getPrice());
-            persistCart.setQuantity(cart.getQuantity());
-
-            cartRepository.save(persistCart);
-        }
+    public List<Cart> getCartList(Integer userId) {
+        return cartRepository.getListByUserId(userId);
     }
 }

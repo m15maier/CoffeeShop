@@ -9,10 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface SharePaymentRepository extends JpaRepository<User, Long> {
+    List<User> getUsersByNameStartingWithIgnoreCase(String name);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM users")
-    List<User> getAllUsers();
-    @Query(nativeQuery = true, value = "SELECT * FROM users WHERE user_status = :user_status")
-    List<User> findUserByStatus(@Param(value = "user_status") String status);
+    @Query(nativeQuery = true, value = "SELECT * FROM users WHERE user_name LIKE :name% ") // SQL
+    List<User> findAutocomplete(@Param(value = "name") String name);
 }

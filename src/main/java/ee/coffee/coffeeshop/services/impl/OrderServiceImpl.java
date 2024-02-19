@@ -1,60 +1,104 @@
 package ee.coffee.coffeeshop.services.impl;
 
-import ee.coffee.coffeeshop.models.Order;
+import ee.coffee.coffeeshop.entity.Cart;
+import ee.coffee.coffeeshop.entity.Order;
+import ee.coffee.coffeeshop.entity.OrderProduct;
+import ee.coffee.coffeeshop.entity.User;
+import ee.coffee.coffeeshop.enums.DeliveryMethod;
+import ee.coffee.coffeeshop.enums.OrderStatus;
+import ee.coffee.coffeeshop.enums.PaymentMethod;
+import ee.coffee.coffeeshop.repositories.CartRepository;
 import ee.coffee.coffeeshop.repositories.OrderRepository;
+import ee.coffee.coffeeshop.repositories.UserRepository;
+import ee.coffee.coffeeshop.services.interfaces.OrderService;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class OrderServiceImpl {
+public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
-    private final UserServiceImpl userService;
+    private final UserRepository userRepository;
+    private final CartRepository cartRepository;
 
-    public Order getById(Integer order_id) {
-        Optional<Object> optional = Optional.of(orderRepository.findById(order_id));
-        return (Order) orderRepository.findById(order_id).orElse(null);
+    @Transactional
+    @Override
+    public void saveOrder(PaymentMethod paymentType, DeliveryMethod deliveryType, Integer userId) {
+        Order order = new Order();   // создание заказа
+        order.setPaymentType(String.valueOf(paymentType));  // передача типа оплаты в заказ
+        order.setDeliveryType(String.valueOf(deliveryType));    // передача типа доставки заказа
+        order.setOrderStatus(String.valueOf(OrderStatus.ACTIVE));    // автоматически присваевается статус
+
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isEmpty()) {
+            throw new EntityNotFoundException("User not found");
+        }
+
+        order.setUser(userOptional.get());  // устанавка клиента для этого заказа
+        addOrderProductsList(order);   // добавляется список товаров в заказе
+        orderRepository.save(order);    // сохранение заказа в базу со всем списком товаров
+        cartRepository.deleteByUserId(userId);  // очищение таблицы
     }
 
-    @Bean
-    public List<Order> findAllOrders() {
+
+    // добавление списка товаров в заказ
+    private void addOrderProductsList(Order order) {
+        List<Cart> cartList = cartRepository.getListByUserId(order.getUser().getUserId());
+        List<OrderProduct> orderProductList = new ArrayList<>();   // создаётся пустого списка товаров в заказе
+        Integer totalQuantity = 0;  // создаётся переменную, сколько всего товаров в заказе
+
+        for (Cart cart : cartList) {    // перебират все продукты в корзине поочереди
+            OrderProduct orderProduct = new OrderProduct();     // для каждого продукта из корзины создаётся заказ
+
+            orderProduct.setProduct(cart.getProducts());    //добавляется продукт
+            orderProduct.setQuantity(cart.getQuantity());     //добавляется количество
+            orderProduct.setOrder(order);    // заполняется заказ
+
+            orderProductList.add(orderProduct);   // добавляется новый товар в список  товаров в заказе
+
+            totalQuantity += orderProduct.getQuantity();  // добавляется по одному количество продуктов
+        }
+
+        order.setOrderProducts(orderProductList);    // сохраняется список товаров в заказе
+        order.setTotalQuantity(totalQuantity);      // сохраняет общее количество товаров в заказе
+    }
+
+    @Transactional
+    @Override
+    public List<Order> getOrderList() {
         return orderRepository.findAll();
     }
-    @Bean
-    public List<Order> findAllProducts() {
-        return orderRepository.findAll();
-    }
-    @Bean
-    public List<Order> findAllUsers() {
-        return orderRepository.findAll();
+
+    @Transactional
+    @Override
+    public Order getOrderById(Integer id) {
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        if (optionalOrder.isPresent()) {
+            return optionalOrder.get();
+        } else {
+            return null;
+        }
     }
 
-    public void save(Order order) {
-        if (order == null) {
+    @Transactional
+    @Override
+    public void setOrderStatus(OrderStatus orderStatus, Integer id) {
+        Order orderById = getOrderById(id);
+        if (orderById == null) {
             return;
         }
-        orderRepository.save(order);
-    }
-
-
-    public void deleteById(Integer id) {
-    if (id != null && orderRepository.existsById(id)) {
-    orderRepository.deleteById(id);
+        orderById.setOrderStatus(String.valueOf(orderStatus));
+        orderRepository.save(orderById);
     }
 }
 
-public void update(Integer id, Order order) {
-        Optional<Order> persistOrderOptional = orderRepository.findById(id);
-        if (persistOrderOptional.isPresent()) {
-            Order persistOrder = persistOrderOptional.get();
-            persistOrder.setCarts(order.getCarts());
-            orderRepository.save(persistOrder);
-        }
-    }
-}
+
 
