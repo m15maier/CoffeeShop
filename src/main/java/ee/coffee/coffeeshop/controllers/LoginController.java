@@ -17,28 +17,29 @@ import java.security.Principal;
 public class LoginController {
     private final UserService userService;
 
-    @GetMapping(value = "/")
-    public String homePage(@RequestParam(name = "title", required = false) String title, Principal principal, Model model) {
+//    @GetMapping(value = "/")
+//    public String homePage(@RequestParam(name = "title", required = false) String title, Principal principal, Model model) {
 //        model.addAttribute("products", Product("title");
 //        model.addAttribute("user", productService.getUserByPrincipal(principal));
-        return "home";
-    }
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+//        return "home";
+//    }
+//    @GetMapping("/login")
+//    public String login() {
+//        return "login";
+//    }
+//
+//    @GetMapping(value = "/registration")
+//    public String registration() {
+//        return "registration";
+//    }
 
-    @GetMapping(value = "/registration")
-    public String registration() {
-        return "registration";
-    }
 
-    @PostMapping(value = "/registration")
-    public String createUser(User user, Model model) {
-        if (!userService.createUser(user)) {
-            model.addAttribute("errorMessage", "User with this email: " + user.getUser_email() + " already exists");
-            return "registration";
-        }
-        return "redirect:/login";
-    }
+//    @PostMapping(value = "/registration")
+//    public String addUser(User user, Model model) {
+//        if (!userService.addUser(user)) {
+//            model.addAttribute("errorMessage", "User with this email: " + user.getUser_email() + " already exists");
+//            return "registration";
+//        }
+//        return "redirect:/login";
+//    }
 }

@@ -17,28 +17,15 @@ import java.util.List;
 public class CartController {
 
     public CartService cartService;
-
-    @GetMapping(value = "/user/cart/get")
-    public List<Cart> getCart (@AuthenticationPrincipal UserDetails userDetails) {
-        Integer userId = ((Security)userDetails).getUserId();
-        return CartService.getListCart(userId);
-    }
-
     @PostMapping(value = "/user/cart/add")
-    public void addToCart(@AuthenticationPrincipal UserDetails userDetails, @RequestBody CartDTO cartDTO)  {
-    Integer userId = ((Security) userDetails).getUserId();
-    cartService.addToCart(cartDTO.getProductId(), cartDTO.getQuantity(), userId);
+    public void addProductToCart(@AuthenticationPrincipal UserDetails userDetails, @RequestBody CartDTO cartDTO) {
+        Integer userId = ((Security) userDetails).getUserId();
+        cartService.addProductToCart(cartDTO.getProductId(), cartDTO.getQuantity(), userId);
     }
 
     @DeleteMapping(value = "/user/cart/delete/{product_id}")
-    public void deleteFromCart(@AuthenticationPrincipal UserDetails userDetails, @PathVariable(value = "product_id") Integer productId) {
-        Integer userId = ((Security)userDetails).getUserId();
-        cartService.deleteFromCart(userId, productId);
-    }
-
-    @PutMapping(value = "/user/cart/update")
-    public void updateCart(@AuthenticationPrincipal UserDetails userDetails, @PathVariable CartDTO cartDTO) {
+    public void deleteProductFromCart(@AuthenticationPrincipal UserDetails userDetails, @PathVariable(value = "product_id") Integer productId) {
         Integer userId = ((Security) userDetails).getUserId();
-        CartService.updateCart(cartDTO.getProductId(), cartDTO.getQuantity(), userId);
+        cartService.deleteProductFromCart(userId, productId);
     }
 }

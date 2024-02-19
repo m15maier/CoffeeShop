@@ -43,14 +43,14 @@ public class OrderServiceImpl implements OrderService {
         }
 
         order.setUser(userOptional.get());  // устанавка клиента для этого заказа
-        addOrderProductsList(order);   // добавляется список товаров в заказе
+        fillOrder(order);   // добавляется список товаров в заказе
         orderRepository.save(order);    // сохранение заказа в базу со всем списком товаров
         cartRepository.deleteByUserId(userId);  // очищение таблицы
     }
 
-
-    // добавление списка товаров в заказ
-    private void addOrderProductsList(Order order) {
+    @Transactional
+    @Override
+    public void fillOrder(Order order) {     // добавление списка товаров в заказ
         List<Cart> cartList = cartRepository.getListByUserId(order.getUser().getUserId());
         List<OrderProduct> orderProductList = new ArrayList<>();   // создаётся пустого списка товаров в заказе
         Integer totalQuantity = 0;  // создаётся переменную, сколько всего товаров в заказе
@@ -81,11 +81,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order getOrderById(Integer id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
-        if (optionalOrder.isPresent()) {
-            return optionalOrder.get();
-        } else {
-            return null;
-        }
+        return optionalOrder.orElse(null);
     }
 
     @Transactional

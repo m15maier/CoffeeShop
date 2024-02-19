@@ -14,11 +14,6 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping(value = "/products/{id}")
-    public Product productById(@PathVariable Integer id) {
-        Product product = productService.getProductById(id);
-        return product;
-    }
 
     @DeleteMapping(value = "/products/delete/{id}")
     public String deleteProduct(@PathVariable Integer id) {
@@ -31,23 +26,5 @@ public class ProductController {
     public void saveProduct(@RequestBody Product product) {
         System.out.println(product.getTitle());
         productService.saveProduct(product);
-    }
-
-
-    @GetMapping(value = "/admin/product/active/{id}")
-    public void activeProduct (@PathVariable Integer id) {
-        productService.activeById(id);
-    }
-
-
-    @PutMapping(value = "/admin/product/inactive/{id}")
-    public void inactiveProduct (@PathVariable Integer id) {
-        productService.inactiveById(id);
-    }
-
-
-    @PutMapping(value = "/admin/product_list")
-    public List<Product> getProductList() {
-        return productService.getListOfAllProducts();
     }
 }

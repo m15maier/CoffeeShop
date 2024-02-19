@@ -12,6 +12,9 @@ public interface OrderService {
 
     void saveOrder(PaymentMethod paymentType, DeliveryMethod deliveryType, Integer userId);
 
+    @Transactional
+    void fillOrder(Order order);
+
     List<Order> getOrderList();
 
     Order getOrderById(Integer id);

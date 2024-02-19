@@ -24,7 +24,7 @@ public class UserController {
 
     // получает идентификатор пользователя из объекта UserDetails
     @GetMapping("/user/get")
-    public User getUser(@AuthenticationPrincipal UserDetails userDetails) { // Аннотация указывает на то, что нужно использовать текущего аутентифицированного пользователя в качестве значения параметра userDetails
+    public User getUserById(@AuthenticationPrincipal UserDetails userDetails) { // Аннотация указывает на то, что нужно использовать текущего аутентифицированного пользователя в качестве значения параметра userDetails
 
         Integer userId = ((Security) userDetails).getUserId();
         User user = userService.getUserById(userId);
@@ -40,19 +40,7 @@ public class UserController {
 
 
 
-
-
-
-
-
     // только с ролью админа
-
-    @GetMapping(value = "/admin/user/{id}")
-    public User getUser(@PathVariable(value = "id") Integer id, HttpServletRequest request, @Param(value = "ADMIN") UserRole userRole) {
-        User user = userService.getUserById(id);
-        return user;
-    }
-
 
     @GetMapping(value = "admin/user/get_all_users")
     public List<User> getAllUsers() {

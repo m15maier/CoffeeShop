@@ -26,16 +26,14 @@ public class OrderController {
         orderService.saveOrder(orderDTO.getPaymentMethod(), orderDTO.getDeliveryMethod(), userId);
     }
 
-
     // только с ролью админа
-
     @GetMapping(value = "/admin/order/list")
     public List<Order> getOrderList() {
         return orderService.getOrderList();
     }
 
     @GetMapping(value = "/admin/order/{id}")
-    public Order getOrder(@PathVariable(name = "id") Integer id) {
+    public Order getOrderById(@PathVariable(name = "id") Integer id) {
         return orderService.getOrderById(id);
     }
 

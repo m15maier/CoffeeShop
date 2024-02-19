@@ -17,7 +17,7 @@ import java.util.*;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public abstract class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final SecurityRepository securityRepository;
 
@@ -54,7 +54,7 @@ public abstract class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User getUserById (Integer user_id) {
+    public User getUserById(Integer user_id) {
         Optional<User> optionalUser = userRepository.findById(user_id);
         return optionalUser.orElse(null);
 
@@ -66,4 +66,7 @@ public abstract class UserServiceImpl implements UserService {
         return userRepository.getAllUsers();
     }
 
-}
+//    @Override
+//    public boolean addUser(User user) {
+//        return true;
+    }

@@ -11,10 +11,8 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,9 +25,9 @@ public abstract class CartServiceImpl implements CartService {
     private final ProductRepository productRepository;
 
     // метод, который добавляет продукт в корзину пользователя
-    @Transactional
-    @Modifying
+
     @Override
+    @Transactional
    public void addProductToCart(Integer productId, Integer quantity, Integer userId) {
         // метод принимает три параметра
 
@@ -51,34 +49,12 @@ public abstract class CartServiceImpl implements CartService {
         cartRepository.save(cartEntity);
     }
 
-    @Transactional
-    @Modifying
+
     @Override
+    @Transactional
     public void deleteProductFromCart(Integer userId, Integer productId) {
         Cart cartToDelete = CartRepository.getByQuantityAndUser_idAndProduct_id(userId, productId);
         assert cartToDelete != null;
         cartRepository.delete(cartToDelete);
-    }
-
-
-    @Transactional
-    @Modifying
-    @Override
-    public void changeQuantity(Integer productId, Integer userId, Integer quantity) {
-        Cart cartChange = CartRepository.getByQuantityAndUser_idAndProduct_id(userId, productId);
-
-        if (cartChange != null) {
-            cartChange.setQuantity(quantity);
-            cartRepository.save(cartChange);
-        } else {
-            throw new EntityNotFoundException("not found");
-        }
-    }
-
-    @Transactional
-    @Modifying
-    @Override
-    public List<Cart> getCartList(Integer userId) {
-        return cartRepository.getListByUserId(userId);
     }
 }

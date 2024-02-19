@@ -21,47 +21,11 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public Product getProductById(Integer id) {
-        Optional<Product> optional = productRepository.findById(id);
-        if (optional.isPresent()) {
-            return optional.get();
-        } else {
-            throw new EntityNotFoundException("product " + id + " not found");
-        }
-    }
-
-    @Override
     public void saveProduct(Product product) {
         productRepository.save(product);
     }
 
     @Override
     public void deleteProduct(Integer id) {
-    }
-
-    @Override
-    public void activeById(Integer id) {
-        Product product = getProductById(id);
-        if (product == null) {
-            return;
-        }
-        product.setStatus(ProductStatus.ACTIVE);
-        productRepository.save(product);
-    }
-
-
-    @Override
-    public void inactiveById(Integer id) {
-        Product product = getProductById(id);
-        if (product == null) {
-            return;
-        }
-        product.setStatus(ProductStatus.INACTIVE);
-        productRepository.save(product);
-    }
-
-    @Override
-    public List<Product> getListOfAllProducts() {
-        return null;
     }
 }
