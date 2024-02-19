@@ -12,6 +12,7 @@ public class ProductController {
 
     private final ProductService productService;
 
+    // только с ролью админа
 
     @DeleteMapping(value = "/products/delete/{id}")
     public String deleteProduct(@PathVariable Integer id) {
@@ -19,10 +20,10 @@ public class ProductController {
         return "redirect:/";
     }
 
-// только с ролью админа
-    @PostMapping(value = "/admin/product/save")
-    public void saveProduct(@RequestBody Product product) {
+
+    @PostMapping(value = "/admin/product/add")
+    public void addProduct(@RequestBody Product product) {
         System.out.println(product.getTitle());
-        productService.saveProduct(product);
+        productService.addProduct(product);
     }
 }

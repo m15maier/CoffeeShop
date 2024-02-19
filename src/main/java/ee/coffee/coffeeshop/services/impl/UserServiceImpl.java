@@ -65,8 +65,4 @@ public class UserServiceImpl implements UserService {
         public List<User> getAllUsers() {
         return userRepository.getAllUsers();
     }
-
-//    @Override
-//    public boolean addUser(User user) {
-//        return true;
     }
