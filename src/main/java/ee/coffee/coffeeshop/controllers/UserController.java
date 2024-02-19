@@ -60,8 +60,5 @@ public class UserController {
     }
 
 
-    @GetMapping(value = "/admin/user/{id}/status/{status}")
-    public List<User> getUserByStatus(@PathVariable(name = "status") String status) {
-        return userService.getUserByStatus(status);
-    }
+
 }

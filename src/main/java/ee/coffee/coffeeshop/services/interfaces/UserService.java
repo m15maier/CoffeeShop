@@ -15,8 +15,6 @@ public interface UserService {
     User getUserById(Integer id);
 
     List<User> getAllUsers();
-    List<User> getUserByStatus(String status);
-
     boolean createUser(User user);
 
 
