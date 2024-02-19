@@ -1,7 +1,6 @@
 package ee.coffee.coffeeshop.controllers;
 
 import ee.coffee.coffeeshop.dto.CartDTO;
-import ee.coffee.coffeeshop.entity.Cart;
 import ee.coffee.coffeeshop.entity.Security;
 import ee.coffee.coffeeshop.services.interfaces.CartService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 @Controller     // создаётся контроллер и управляется спрингом
 @RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
 public class CartController {

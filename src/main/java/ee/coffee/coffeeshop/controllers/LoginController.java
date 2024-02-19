@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
-@Controller     // создаётся контроллер и управляется спрингом
-@RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
+//@Controller     // создаётся контроллер и управляется спрингом
+//@RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
 
 public class LoginController {
-    private final UserService userService;
+//    private final UserService userService;
 
 //    @GetMapping(value = "/")
 //    public String homePage(@RequestParam(name = "title", required = false) String title, Principal principal, Model model) {

@@ -1,7 +1,10 @@
 package ee.coffee.coffeeshop.dto;
 
 import lombok.Data;
-import javax.validation.constraints.*;
+
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Data   // getter + setter + required args + to string + equals
 public class UserDTO {

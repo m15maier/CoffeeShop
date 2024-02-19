@@ -3,11 +3,8 @@ package ee.coffee.coffeeshop.controllers;
 import ee.coffee.coffeeshop.dto.UserDTO;
 import ee.coffee.coffeeshop.entity.Security;
 import ee.coffee.coffeeshop.entity.User;
-import ee.coffee.coffeeshop.enums.UserRole;
 import ee.coffee.coffeeshop.services.interfaces.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -27,8 +24,7 @@ public class UserController {
     public User getUserById(@AuthenticationPrincipal UserDetails userDetails) { // Аннотация указывает на то, что нужно использовать текущего аутентифицированного пользователя в качестве значения параметра userDetails
 
         Integer userId = ((Security) userDetails).getUserId();
-        User user = userService.getUserById(userId);
-        return user;
+        return userService.getUserById(userId);
     }
 
     // сохраняет нового пользователя и его данные
