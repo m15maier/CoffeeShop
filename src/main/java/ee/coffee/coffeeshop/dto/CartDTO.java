@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data       // getter + setter + required args + to string + equals
 public class CartDTO {
-    private Integer productId;
+    private Long productId;
     private Integer quantity;
 }

@@ -22,7 +22,8 @@ public class Cart {
     @Column(name = "user_id")
     private Integer user_id;
 
-    @Column(name = "products")
+    @ManyToOne
+    @JoinColumn(name = "products")
     private Product products;
 
     @ManyToOne

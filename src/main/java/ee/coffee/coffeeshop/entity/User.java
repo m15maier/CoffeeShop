@@ -1,9 +1,15 @@
 package ee.coffee.coffeeshop.entity;
 
+import ch.qos.logback.core.status.StatusManager;
+import ee.coffee.coffeeshop.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.management.relation.Role;
+import java.util.HashSet;
+import java.util.Set;
 
 @Table(name = "users")      // таблица
 @Data       // getter + setter + required args + to string + equals
@@ -31,5 +37,9 @@ public class User {
     @Column(name = "user_payment")
     private int payment;
 
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles = new HashSet<>();
 
 }

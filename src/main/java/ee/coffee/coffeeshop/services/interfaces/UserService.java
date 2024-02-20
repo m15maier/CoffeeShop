@@ -20,6 +20,5 @@ public interface UserService {
     @Transactional
     List<User> getAllUsers();
 
-
-//    boolean addUser(User user);
+    boolean createUser(User user);
 }

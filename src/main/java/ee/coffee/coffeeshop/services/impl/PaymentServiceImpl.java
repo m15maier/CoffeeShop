@@ -2,7 +2,7 @@ package ee.coffee.coffeeshop.services.impl;
 
 import ee.coffee.coffeeshop.entity.User;
 import ee.coffee.coffeeshop.repositories.UserRepository;
-import ee.coffee.coffeeshop.services.interfaces.SharePayment;
+import ee.coffee.coffeeshop.services.interfaces.PaymentService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 @Transactional
-public class SharePaymentImpl implements SharePayment {
+public class PaymentServiceImpl implements PaymentService {
 
 private final UserRepository userRepository;
 

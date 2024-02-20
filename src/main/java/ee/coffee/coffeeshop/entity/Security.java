@@ -32,7 +32,7 @@ public class Security implements UserDetails {
     @Column(nullable = false, name = "password")
     private String password;
 
-    @Column(nullable = false, name = "role")
+    @Column(nullable = false, name = "user_role")
     @Enumerated(EnumType.STRING)
     private UserRole role;
 

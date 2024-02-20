@@ -17,6 +17,13 @@ public class ProductController {
     private final ProductService productService;
 
 
+    @GetMapping(value = "/")
+    public String home(@RequestParam(name = "product_title", required = false) String title, Principal principal, Model model) {
+        model.addAttribute("products", productService.listProducts(title));
+        model.addAttribute("user", productService.getUserByPrincipal(principal));
+        return "home";
+    }
+
     @GetMapping(value = "/products")
     public String products(@RequestParam(name = "product_title", required = false) String title, Principal principal, Model model) {
         model.addAttribute("products", productService.listProducts(title));
@@ -32,10 +39,10 @@ public class ProductController {
 
     // только с ролью админа
 
-    @PostMapping(value = "/products/create")
+    @PostMapping(value = "/product-create")
     public String createProduct(Product product, Product principal) throws IOException {
         productService.saveProduct(principal, product);
-        return "redirect:/";
+        return "products";
     }
 
     @DeleteMapping(value = "/products/delete/{id}")

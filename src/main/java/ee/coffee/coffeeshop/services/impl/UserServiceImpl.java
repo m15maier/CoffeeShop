@@ -10,10 +10,14 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.util.*;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+import javax.management.relation.Role;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static org.hibernate.Hibernate.map;
 
 
 @Service
@@ -22,6 +26,8 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final SecurityRepository securityRepository;
+//    private final PasswordEncoder passwordEncoder;
+
 
     @Transactional
     @Override
@@ -51,7 +57,6 @@ public class UserServiceImpl implements UserService {
 
         security.setRole(UserRole.USER);
         securityRepository.save(security);
-
     }
 
     @Transactional
@@ -60,10 +65,27 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-
     @Transactional
     @Override
         public List<User> getAllUsers() {
         return userRepository.getAllUsers();
     }
+    @Transactional
+    @Override
+    public boolean createUser(User user) {
+        return false;
     }
+}
+//    @Transactional
+//    public void changeUserRoles(User user, Map<String, String> form) {
+//        Set<String> roles = Arrays.stream(Role.values())
+//                .map(Role::userName)
+//                .collect(Collectors.toSet());
+//        user.getRoles().clear();
+//        for (String key : form.keySet()) {
+//            if (roles.contains(key)) {
+//                user.getRoles().add(Role.valueOf(key));
+//            }
+//        }
+//        userRepository.save(user);
+//    }

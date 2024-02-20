@@ -28,7 +28,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-   public void addProductToCart(Integer productId, Integer quantity, Integer userId) {
+   public void addProductToCart(Long productId, Integer quantity, Integer userId) {
         // метод принимает три параметра
 
         Cart cartEntity = new Cart();   // создаётся новый продукт
@@ -41,7 +41,7 @@ public class CartServiceImpl implements CartService {
         cartEntity.setUser(userOptional.get());
 
 
-        Optional<Product> productOptional = productRepository.findById(Integer.valueOf(productId));
+        Optional<Product> productOptional = productRepository.findById(Integer.valueOf(Math.toIntExact(productId)));
         if (!productOptional.isPresent()) {     // поиск продукта
             throw new EntityNotFoundException("not found");     // если не найден, то выбрасывается исключение
     }
