@@ -19,8 +19,6 @@ public class Delivery {
         @Column(name = "delivery_status")
         private String delivery_status;
 
-        @Enumerated(EnumType.STRING)
-
         @ManyToOne
         private Order order;
 

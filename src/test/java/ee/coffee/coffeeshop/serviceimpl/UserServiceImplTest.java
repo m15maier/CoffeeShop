@@ -62,6 +62,24 @@ public class UserServiceImplTest {
         }
 
 
+//    public void getUserByIdTest() {
+//
+//        List<User> users = new ArrayList<>();
+//
+//        User jess = new User();
+//        jess.setUserId(3L);
+//        users.add(jess);
+//
+//        when(userRepository.findById(3)).thenReturn(Optional.of(jess));  // задаётся поведение мокито для метода
+//        User jess =       // запускается тестируемый метод
+//
+//        assertNotNull(users);               // проверяются результаты теста
+//        assertNotNull(users1);
+//
+//        assertEquals (users.size(), users1.size());
+//
+//        verify(userRepository, times(2)).getAllUsers();
+//    }
 
 
 
