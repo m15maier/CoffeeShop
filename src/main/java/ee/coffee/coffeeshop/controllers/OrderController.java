@@ -37,9 +37,9 @@ public class OrderController {
         return orderService.getOrderById(id);
     }
 
-    @PutMapping(value = "/admin/order/{id}/set_status/{status}")
-    public void setOrderStatus(@PathVariable(name = "status") OrderStatus status, @PathVariable(name = "id") Long id) {
-        orderService.setOrderStatus(status, id);
+    @PutMapping(value = "/admin/order/{id}/set_status/{order_status}")
+    public void setOrderStatus(@PathVariable(name = "order_status") OrderStatus orderStatus, @PathVariable(name = "id") Long id, @PathVariable String order_status) {
+        orderService.setOrderStatus(orderStatus, id);
     }
 }
 
