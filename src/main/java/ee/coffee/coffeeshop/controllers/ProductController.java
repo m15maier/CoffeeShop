@@ -4,6 +4,7 @@ import ee.coffee.coffeeshop.entity.Product;
 import ee.coffee.coffeeshop.services.interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller     // создаётся контроллер и управляется спрингом
@@ -14,12 +15,17 @@ public class ProductController {
 
     // только с ролью админа
 
-    @DeleteMapping(value = "/products/delete/{id}")
-    public String deleteProduct(@PathVariable Integer id) {
-       productService.deleteProduct(id);
-        return "redirect:/";
+    @GetMapping(value = "/products")
+    public String allProducts(Model model) {
+        return "products";
     }
 
+
+    @DeleteMapping(value = "/products/delete/{id}")
+    public String deleteProduct(@PathVariable Integer id) {
+       productService.deleteProduct(id.longValue());
+        return "redirect:/";
+    }
 
     @PostMapping(value = "/admin/product/add")
     public void addProduct(@RequestBody Product product) {
