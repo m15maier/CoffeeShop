@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 
 @Table(name= "products")    // таблица
 @Data       // getter + setter + required args + to string + equals
@@ -35,5 +37,16 @@ public class Product {
     @Column(name = "product_status")
     @Enumerated(EnumType.STRING)
     private ProductStatus productStatus;
+
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn
+    private User user;
+
+    private LocalDateTime dateOfCreated;
+
+    @PrePersist
+    private void init() {
+        dateOfCreated = LocalDateTime.now();
+    }
 
 }

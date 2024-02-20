@@ -7,17 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.security.Principal;
+
 @Controller     // создаётся контроллер и управляется спрингом
 @RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
 public class ProductController {
 
     private final ProductService productService;
 
-    // только с ролью админа
+
 
     @GetMapping(value = "/products")
-    public String products(Model model) {
+    public String products(@RequestParam(name = "title", required = false) String title, Principal principal, Model model) {
         model.addAttribute("products", productService.listProducts());
+        model.addAttribute("user", productService.getUserByPrincipal(principal));
         return "products";
     }
 
@@ -27,10 +31,11 @@ public class ProductController {
         return "product-info";
     }
 
+    // только с ролью админа
 
     @PostMapping(value = "/admin/product/create")
-    public String createProduct(Product product, Long id) {
-        productService.saveProduct(product, id);
+    public String createProduct(Product product, Product principal) throws IOException {
+        productService.saveProduct(principal, product.getId());
         return "redirect:/";
     }
 
