@@ -17,9 +17,9 @@ public interface OrderService {
 
     List<Order> getOrderList();
 
-    Order getOrderById(Integer id);
+    Order getOrderById(Long id);
 
     @Transactional
-    void setOrderStatus(OrderStatus orderStatus, Integer id);
+    void setOrderStatus(OrderStatus orderStatus, Long id);
 
 }

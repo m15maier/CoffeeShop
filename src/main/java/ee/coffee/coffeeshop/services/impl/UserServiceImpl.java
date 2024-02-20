@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.*;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 
 @Service
 @Slf4j
@@ -37,10 +39,10 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-        public void saveSecurity(Integer userId, String userEmail, String userPassword) {
+        public void saveSecurity(Long userId, String userEmail, String userPassword) {
 
         Security security = new Security();
-        security.setUserId(userId);
+        security.setUserId(Math.toIntExact(userId));
         security.setLogin(userEmail);
 
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -54,11 +56,10 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User getUserById(Integer id) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        return optionalUser.orElse(null);
-
+    public User getUserById(Long user_id) {
+        return null;
     }
+
 
     @Transactional
     @Override

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -14,7 +15,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> getAllUsers();
 
     @Query(nativeQuery = true, value = "SELECT * FROM users")
-    List<User> findUserByUserId(Integer id);
-
-
+    Optional<User> findById(Long intExact);
 }

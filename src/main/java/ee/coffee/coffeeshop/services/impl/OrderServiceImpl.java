@@ -79,14 +79,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public Order getOrderById(Integer id) {
+    public Order getOrderById(Long id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
         return optionalOrder.orElse(null);
     }
 
     @Transactional
     @Override
-    public void setOrderStatus(OrderStatus orderStatus, Integer id) {
+    public void setOrderStatus(OrderStatus orderStatus, Long id) {
         Order orderById = getOrderById(id);
         if (orderById == null) {
             return;

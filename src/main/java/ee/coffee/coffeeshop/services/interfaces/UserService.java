@@ -12,11 +12,10 @@ public interface UserService {
     User saveUser(String name, String email, String address, String phone);
 
     @Transactional
-    void saveSecurity(Integer userId, String userEmail, String userPassword);
+    void saveSecurity(Long userId, String userEmail, String userPassword);
 
     @Transactional
-    User getUserById(Integer user_id);
-
+    User getUserById(Long id);
 
     @Transactional
     List<User> getAllUsers();

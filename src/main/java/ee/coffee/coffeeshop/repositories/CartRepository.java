@@ -19,7 +19,7 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
     }
 
     @Query(nativeQuery = true, value = "SELECT * FROM cart WHERE user_id = :user_id")
-    List<Cart> getListByUserId(@Param(value = "user_id") Integer userId);
+    List<Cart> getListByUserId(@Param(value = "user_id") Long userId);
 
     @Modifying
     @Query(nativeQuery = true, value = "DELETE FROM cart WHERE user_id = :user_id")

@@ -25,7 +25,7 @@ public class UserController {
     @GetMapping("/user/get")
     public User getUserById(@AuthenticationPrincipal UserDetails userDetails) { // Аннотация указывает на то, что нужно использовать текущего аутентифицированного пользователя в качестве значения параметра userDetails
 
-        Integer userId = ((Security) userDetails).getUserId();
+        Long userId = Long.valueOf(((Security) userDetails).getUserId());
         return userService.getUserById(userId);
     }
 
