@@ -16,20 +16,27 @@ public class ProductController {
     // только с ролью админа
 
     @GetMapping(value = "/products")
-    public String allProducts(Model model) {
+    public String products(Model model) {
+        model.addAttribute("products", productService.listProducts());
         return "products";
     }
 
+    @GetMapping(value = "/product/{id}")
+    public String productInfo(@PathVariable Long id, Model model) {
+        model.addAttribute("product", productService.getProductById(id));
+        return "product-info";
+    }
 
-    @DeleteMapping(value = "/products/delete/{id}")
-    public String deleteProduct(@PathVariable Integer id) {
-       productService.deleteProduct(id.longValue());
+
+    @PostMapping(value = "/admin/product/create")
+    public String createProduct(Product product, Long id) {
+        productService.saveProduct(product, id);
         return "redirect:/";
     }
 
-    @PostMapping(value = "/admin/product/add")
-    public void addProduct(@RequestBody Product product) {
-        System.out.println(product.getTitle());
-        productService.addProduct(product);
+    @DeleteMapping(value = "/products/delete/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return "redirect:/";
     }
 }

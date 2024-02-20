@@ -14,17 +14,31 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class ProductServiceImpl implements ProductService {
-
-    private final ProductRepository productRepository;
-
-    private List<Product> productList = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
+    private long ID = 0;
+    public List<Product> productList() {return products; }
 
     @Override
-    public void addProduct(Product product) {
-        productRepository.save(product);
+    public void saveProduct(Product product, Long id) {
+        product.setId(++ID);
+        products.add(product);
     }
 
     @Override
     public void deleteProduct(Long id) {
+        products.removeIf(product -> product.getId().equals(id));
+    }
+
+    @Override
+    public List<Product> listProducts() {
+        return products;
+    }
+
+    @Override
+    public Product getProductById(Long id) {
+        for (Product product : products) {
+            if (product.getId().equals(id)) return product;
+        }
+        return null;
     }
 }

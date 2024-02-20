@@ -38,15 +38,15 @@
     <input type="submit" value="Search" /><br><br><br>
 </form>
 
-<#--<h3>All products:</h3><hr>-->
-<#--<#list products as product>-->
-<#--    <div>-->
-<#--        <p><b>${product.title}</b> ${product.price}€ | <a href="/products/${product.id}"> Read more...</a></p>-->
-<#--    </div>-->
-<#--    <#else>-->
-<#--    <h3>No items</h3>-->
-<#--</#list>-->
-<#--<hr>-->
+<h3>All products:</h3><hr>
+<#list products as product>
+    <div>
+        <p><b>${product.title}</b> ${product.price}€ | <a href="/products/${product.id}"> Read more...</a></p>
+    </div>
+    <#else>
+    <h3>No items</h3>
+</#list>
+<hr>
 
 <#--<#if user.email??>-->
 
