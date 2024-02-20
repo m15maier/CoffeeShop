@@ -18,8 +18,6 @@ public interface OrderService {
     List<Order> getOrderList();
 
     Order getOrderById(Long id);
-
     @Transactional
     void setOrderStatus(OrderStatus orderStatus, Long id);
-
 }
