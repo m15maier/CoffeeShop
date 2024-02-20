@@ -34,5 +34,5 @@ public class Product {
 
     @Column(name = "product_status")
     @Enumerated(EnumType.STRING)
-    private ProductStatus status;
+    private ProductStatus productStatus;
 }
