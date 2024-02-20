@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.security.auth.Subject;
+import java.security.Principal;
 import java.time.LocalDateTime;
 
 
@@ -15,7 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor     // конструктор со всеми полями
 @NoArgsConstructor      //конструктор без аргументов
 
-public class Product {
+public class Product implements Principal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,7 +43,6 @@ public class Product {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private User user;
-
     private LocalDateTime dateOfCreated;
 
     @PrePersist
@@ -49,4 +50,13 @@ public class Product {
         dateOfCreated = LocalDateTime.now();
     }
 
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public boolean implies(Subject subject) {
+        return Principal.super.implies(subject);
+    }
 }
