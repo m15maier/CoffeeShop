@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
@@ -59,6 +60,9 @@ public class UserServiceImplTest {
 
             verify(userRepository, times(2)).getAllUsers();
         }
+
+
+
 
 
     }
