@@ -24,7 +24,6 @@ public class WebSecurityConfiguration {
                 .cors(AbstractHttpConfigurer::disable)   // отключение защиты от межсайтовых атак
                 .authorizeHttpRequests((requests) -> {      // настройка правил доступа для различных URL-адресов
                     requests.requestMatchers("/admin/****").hasRole("ADMIN");
-                    requests.requestMatchers("/user/**").hasRole("USER");
                     requests.requestMatchers("/***").permitAll();
                     requests.anyRequest().permitAll();
                 })
