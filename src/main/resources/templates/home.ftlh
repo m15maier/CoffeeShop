@@ -7,6 +7,7 @@
 
 <body>
 
+
 <h1>Coffee Shop</h1>
 
 <h2>Home Page</h2>
@@ -42,7 +43,7 @@
 <h3>All products:</h3><hr>
 <#list products as product>
     <div>
-        <p><b>${product.title}</b> ${product.price}€ | <a href="/products/${product.id}"> Read more...</a></p>
+        <p><b>${product.title}</b> ${product.price}€ | <a href="/products/ ${product.id}"> Read more...</a></p>
     </div>
     <#else>
     <h3>No items</h3>

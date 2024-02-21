@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Log in</h1><hr>
-<form action="/login" method="post">
+<form action="/login">
     Email: <label><input type="email" name="username"></label><br><br>
     Password: <label><input type="password" name="password"></label><br><br>
     <input type="hidden" name="_csrf" value="{{_csrf.token}}">
