@@ -7,13 +7,26 @@
 
 <body>
 
+<h1>Coffee Shop</h1>
 
-<h1>Main Page</h1>
+<h2>Home Page</h2>
 
-<h4> <a href="/login"> Log in </a> </h4>
-<h4> <a href="/registration"> Registration </a> </h4> <br><br>
+<#if user.email??>
+    <h3>Hello <i>${user.user_name}</i></h3>
+    <form action="/logout" method="post">
+        <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />
+        <input type="submit" value="Log out" /><br><br><br>
+    </form>
+<#else>
+    <a href="/login"> Log in</a>
+</#if>
+<hr>
+
+<#--<h4> <a href="/login"> Log in </a> </h4>-->
+<a href="/registration"> Registration </a>  <br><br>
 
 <div> <a href="/admin"> Admin Panel       .</a>
+    <a href="/product-create"> NEW Product Create        .</a>
     <a href="/cart"> Cart        .</a>
     <a href="/order"> Order       .</a></div>
 

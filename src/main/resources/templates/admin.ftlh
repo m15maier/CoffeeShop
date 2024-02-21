@@ -9,23 +9,21 @@
 
 <table>
     <tr>
-        <th>Email</th>
-        <th>Role</th>
+        <th>List of users</th>
 
-        <th>More information</th>
     </tr>
     <#list users as user>
         <tr>
             <th>${user.user_email}</th>
             <th><#list user.roles as role>${role}</#list></th>
-<#--            <th>-->
-<#--                <form action="/admin/user/ban/${user.id}" method="post">-->
+            <th>
+                <form action="/admin/user/ban/${user.userId}" method="post">
                     <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />
-<#--                    <input type="submit" value="Ban">-->
-<#--                </form>-->
-<#--            </th>-->
+                    <input type="submit" value="Ban">
+                </form>
+            </th>
             <th><a href="/admin/user/edit/${user.getUserId()}">Edit</a></th>
-            <th><a href="/admin/user/${user.getUserId()}">More information</a></th>
+            <th><a href="/admin/user/${user.userId}">More information</a></th>
         </tr>
 
 

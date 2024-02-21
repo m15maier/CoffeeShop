@@ -5,20 +5,19 @@ import ee.coffee.coffeeshop.services.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller     // создаётся контроллер и управляется спрингом
 @RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
 
 public class LoginController {
     private final UserService userService;
-
-    @GetMapping("/login")
+    @RequestMapping("/login")
     public String login() {
-       return "/login";
-
+        return "/login";
     }
+
+
     @GetMapping(value = "/registration")
     public String registration() {
         return "registration";

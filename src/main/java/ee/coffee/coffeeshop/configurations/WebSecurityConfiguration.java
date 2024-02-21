@@ -2,12 +2,15 @@ package ee.coffee.coffeeshop.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -24,27 +27,34 @@ public class WebSecurityConfiguration {
                 .cors(AbstractHttpConfigurer::disable)   // отключение защиты от межсайтовых атак
                 .authorizeHttpRequests((requests) -> {      // настройка правил доступа для различных URL-адресов
                     requests.requestMatchers("/admin/****").hasRole("ADMIN");
-                    requests.requestMatchers("/***").permitAll();
+                    requests.requestMatchers("/****").permitAll();
                     requests.anyRequest().permitAll();
                 })
                 .formLogin(AbstractHttpConfigurer::disable);    // отключение формы входа
-        http.httpBasic(httpBasic -> httpBasic.init(http));
+                http.httpBasic(httpBasic -> httpBasic.init(http));
 
         return http.build();
 
     }
 
-    // метод для аутентификации и авторизации пользователей
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
+
+ //    метод для аутентификации и авторизации пользователей
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails userDetails =
         User.builder()
-                .username("Admin")
+                .username("admin@gmail.com")
                 .password("admin")
                 .roles("ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(userDetails);
-
 }
 
 

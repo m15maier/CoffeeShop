@@ -16,7 +16,6 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
-//@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class AdminController {
 
     private final UserService userService;
@@ -34,10 +33,10 @@ public class AdminController {
         return "user-edit";
     }
 
-//    @PostMapping("/admin/user/edit")
-//    public String userEdit(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
-//        userService.saveSecurity(user.getUserId(), form);
-//        return "redirect:/admin";
-//    }
+    @PostMapping("/admin/user/edit")
+    public String userEdit(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
+        userService.changeUserRoles(user, form);
+        return "redirect:/admin";
+    }
 
 }

@@ -42,7 +42,7 @@ public class ProductController {
     @PostMapping(value = "/product-create")
     public String createProduct(Product product, Product principal) throws IOException {
         productService.saveProduct(principal, product);
-        return "products";
+        return "/product-create";
     }
 
     @DeleteMapping(value = "/products/delete/{id}")

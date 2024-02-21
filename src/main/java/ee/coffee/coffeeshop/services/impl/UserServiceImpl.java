@@ -10,14 +10,13 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.management.relation.Role;
+import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.hibernate.Hibernate.map;
+import static ee.coffee.coffeeshop.enums.UserRole.ADMIN;
 
 
 @Service
@@ -26,7 +25,6 @@ import static org.hibernate.Hibernate.map;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final SecurityRepository securityRepository;
-//    private final PasswordEncoder passwordEncoder;
 
 
     @Transactional
@@ -45,7 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-        public void saveSecurity(Long userId, String userEmail, String userPassword) {
+    public void saveSecurity(Long userId, String userEmail, String userPassword) {
 
         Security security = new Security();
         security.setUserId(Math.toIntExact(userId));
@@ -67,25 +65,32 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-        public List<User> getAllUsers() {
+    public List<User> getAllUsers() {
         return userRepository.getAllUsers();
     }
+
     @Transactional
     @Override
     public boolean createUser(User user) {
         return false;
     }
+
+    @Override
+    public void changeUserRoles(User user, Map<String, String> form) {
+        Set<String> roles = Arrays.stream(UserRole.values())
+                .map(UserRole::name)
+                .collect(Collectors.toSet());
+        user.getRoles().clear();
+        for (String key : form.keySet()) {
+            if (roles.contains(key)) {
+                user.getRoles().add(UserRole.valueOf(ADMIN));
+            }
+        }
+        userRepository.save(user);
+
+    }
+    public User getUserByPrincipal(Principal principal) {
+        if (principal == null) return new User();
+        return userRepository.findByEmail(principal.getName());
+    }
 }
-//    @Transactional
-//    public void changeUserRoles(User user, Map<String, String> form) {
-//        Set<String> roles = Arrays.stream(Role.values())
-//                .map(Role::userName)
-//                .collect(Collectors.toSet());
-//        user.getRoles().clear();
-//        for (String key : form.keySet()) {
-//            if (roles.contains(key)) {
-//                user.getRoles().add(Role.valueOf(key));
-//            }
-//        }
-//        userRepository.save(user);
-//    }
