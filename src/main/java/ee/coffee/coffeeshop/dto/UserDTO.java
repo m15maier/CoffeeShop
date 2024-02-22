@@ -22,6 +22,6 @@ public class UserDTO {
     private String address;
 
     @NotBlank(message ="First name must not be blank")
-    @Digits(integer = 8, fraction = 0)
+    @Digits(integer = 5, fraction = 0)
     private String phone;
 }

@@ -12,5 +12,8 @@
     <input type="submit" value="Log in"/>
 </form>
 <a href="/registration">Sign up</a>
+
+<h4> <-- <a href="/"> Back </a> </h4><hr>
+
 </body>
 </html>

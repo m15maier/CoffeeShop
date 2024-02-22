@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ENG">
+<html lang="EN">
 <head>
     <title>Coffee shop</title>
 </head>
@@ -10,7 +10,7 @@
 <form action="/registration" method="post">
     Name: <label><input type="text" name="name" /></label><br><br>
     Email: <label><input type="email" name="email" /></label><br><br>
-    Phone Number: <label><input type="text" name="numberPhone" /></label><br><br>
+    Phone Number: <label><input type="text" name="phone" /></label><br><br>
     Password: <label><input type="password" name="password" /></label><br><br>
     <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />
     <input type="submit" value="Sign In" />

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ENG">
+<html lang="EN">
 <head>
     <title>Coffee shop</title>
 </head>
@@ -11,15 +11,18 @@
 <b>Description: </b> ${product.description}<br>
 <b>Size: </b> ${product.size}<br>
 <b>Price: </b> ${product.price}<br>
-<#--<b>Author: </b> <a href="/user/{products.user_id}"> ${product.user.name}</a> <br>-->
-<#--<hr>-->
-<form action="/product/delete/${product.id}" method="post">
-    <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />
-    <input type="submit" value="Delete"/>
 
+<form action="/product/delete-from-cart/${product.id}" method="post">
+<#--    <input type="hidden" name="csrfToken" value="{% csrf_token %}" />-->
+    <input type="submit" value="Delete"/>
+</form>
+
+<form action="/product/add-to-cart/${product.id}" method="post">
+<#--    <input type="hidden" name="csrfToken" value="{% csrf_token %}" />-->
+    <input type="submit" value="Add to cart"/>
+</form>
 
 
 <h4> <-- <a href="/"> Back </a> </h4><hr>
-</form>
 </body>
 </html>

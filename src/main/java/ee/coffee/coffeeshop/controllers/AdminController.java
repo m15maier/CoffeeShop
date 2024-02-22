@@ -1,6 +1,7 @@
 package ee.coffee.coffeeshop.controllers;
 
 import ee.coffee.coffeeshop.entity.User;
+import ee.coffee.coffeeshop.enums.UserRole;
 import ee.coffee.coffeeshop.services.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.support.BeanDefinitionDsl;
@@ -16,20 +17,21 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
+@PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
 
     private final UserService userService;
 
     @GetMapping("/admin")
     public String admin(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("users", userService.list());
         return "admin";
     }
 
     @GetMapping("/admin/user/edit/{user}")
     public String userEdit(@PathVariable("user") User user, Model model) {
         model.addAttribute("user", user);
-        model.addAttribute("roles", BeanDefinitionDsl.Role.values());
+        model.addAttribute("roles", UserRole.values());
         return "user-edit";
     }
 
@@ -38,5 +40,6 @@ public class AdminController {
         userService.changeUserRoles(user, form);
         return "redirect:/admin";
     }
+
 
 }

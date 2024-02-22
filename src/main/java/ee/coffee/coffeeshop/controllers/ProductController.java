@@ -3,6 +3,7 @@ package ee.coffee.coffeeshop.controllers;
 import ee.coffee.coffeeshop.entity.Product;
 import ee.coffee.coffeeshop.services.interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,14 +38,17 @@ public class ProductController {
         return "product-info";
     }
 
+
     // только с ролью админа
 
-    @PostMapping(value = "/product-create")
+//    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping(value = "/products/create")
     public String createProduct(Product product, Product principal) throws IOException {
         productService.saveProduct(principal, product);
-        return "/product-create";
-    }
+        return "product-create";
 
+    }
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping(value = "/products/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);

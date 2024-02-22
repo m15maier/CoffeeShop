@@ -43,6 +43,7 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(Long id) {
         productRepository.deleteById(Math.toIntExact(id));
     }
+
     @Override
     public Product getProductById(Long id) {
         return productRepository.findById(Math.toIntExact(id)).orElse(null);

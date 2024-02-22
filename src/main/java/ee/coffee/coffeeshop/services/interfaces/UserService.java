@@ -9,17 +9,17 @@ import java.util.Map;
 public interface UserService {
 
 
-    @Transactional
-    User saveUser(String name, String email, String address, String phone);
+//    @Transactional
+//    User saveUser(String name, String email, String address, String phone);
+//
+//    @Transactional
+//    void saveSecurity(Long userId, String userEmail, String userPassword);
 
-    @Transactional
-    void saveSecurity(Long userId, String userEmail, String userPassword);
+//    @Transactional
+//    User getUserById(Long id);
+//
 
-    @Transactional
-    User getUserById(Long id);
-
-    @Transactional
-    List<User> getAllUsers();
+    List<User> list();
 
     boolean createUser(User user);
 
