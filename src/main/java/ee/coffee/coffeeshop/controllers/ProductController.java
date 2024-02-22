@@ -3,6 +3,7 @@ package ee.coffee.coffeeshop.controllers;
 import ee.coffee.coffeeshop.entity.Product;
 import ee.coffee.coffeeshop.services.interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,34 +16,34 @@ import java.security.Principal;
 @RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
 public class ProductController {
 
+    @Autowired
     private final ProductService productService;
 
 
-    @GetMapping(value = "/")
-    public String home(@RequestParam(name = "product_title", required = false) String title, Principal principal, Model model) {
-        model.addAttribute("products", productService.listProducts(title));
-        model.addAttribute("user", productService.getUserByPrincipal(principal));
-        return "home";
-    }
+//    @GetMapping(value = "/")
+//    public String home(@RequestParam(name = "product_title", required = false) String title, Principal principal, Model model) {
+//        model.addAttribute("products", productService.listProducts(title));
+//        model.addAttribute("user", productService.getUserByPrincipal(principal));
+//        return "home";
+//    }
 
-    @GetMapping(value = "/products")
+    @GetMapping(value = "/")
     public String products(@RequestParam(name = "product_title", required = false) String title, Principal principal, Model model) {
         model.addAttribute("products", productService.listProducts(title));
         model.addAttribute("user", productService.getUserByPrincipal(principal));
         return "products";
     }
 
-    @GetMapping(value = "/products/{id}")
+    @GetMapping(value = "/product/{id}")
     public String productInfo(@PathVariable Long id, Model model) {
         model.addAttribute("product", productService.getProductById(id));
         return "product-info";
     }
 
-    @GetMapping(value = "/product-create")
-    public String createProduct (@RequestParam(name = "product_title", required = false) String title, Principal principal, Model model) {
-        model.addAttribute("product-create", productService.listProducts(title));
-        model.addAttribute("user", productService.getUserByPrincipal(principal));
-        return "product-create";
+    @PostMapping(value = "/product/create")
+    public String createProduct (Product product, Principal principal) throws IOException{
+        productService.saveProduct(product, principal);
+        return "redirect:/";
     }
     // только с ролью админа
 
@@ -54,7 +55,7 @@ public class ProductController {
 //    }
 
 //    @PreAuthorize("hasAuthority('ADMIN')")
-    @DeleteMapping(value = "/products/delete/{id}")
+    @PostMapping(value = "/product/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return "redirect:/";

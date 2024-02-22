@@ -1,33 +1,31 @@
 <!DOCTYPE html>
-<html lang="ENG" xmlns:form="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+<html lang="EN" xmlns:form="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
       xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Coffee shop</title>
 </head>
 
 <body>
+<div> <a href="/admin"> Admin Panel       .</a>
+<a href="/products/create"> NEW Product Create        .</a>
 
 
 <h1>All products</h1>
 
 
-<#--<#if user.email??>-->
-<#--    <h3>Hello <i>${user.user_name}</i></h3>-->
-<#--    <form action="/logout" method="post">-->
+<#if user.email??>
+    <h3>Hello <i>${user.user_name}</i></h3>
+    <form action="/logout" method="post">
 <#--        <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />-->
-<#--    <input type="submit" value="Log out" /><br><br><br>-->
-<#--    </form>-->
-<#--<#else>-->
-<#--    <a href="/login"> Log in</a>-->
-<#--</#if>-->
-<#--<hr>-->
+    <input type="submit" value="Log out" /><br><br><br>
+    </form>
+<#else>
+    <a href="/login"> Log in</a>
+</#if>
+<hr>
 
 <#--<h4> <a href="/login"> Log in </a> </h4>-->
 <#--<h4> <a href="/registration"> Registration </a> </h4> <br><br>-->
-
-<div> <a href="/admin"> Admin Panel       .</a>
-<a href="/cart"> Cart        .</a>
-<a href="/order"> Order       .</a></div>
 
 <br><br>
 
@@ -41,14 +39,14 @@
 <h3>All products:</h3><hr>
 <#list products as product>
     <div>
-        <p><b>${product.title}</b> ${product.price}€ | <a href="/products/${product.id}"> Read more...</a></p>
+        <p><b>${product.title}</b> ${product.price}€    |    <a href="/product/${product.id}"> Read more...</a></p>
     </div>
     <#else>
     <h3>No items</h3>
 </#list>
 <hr>
 
-<#if user.email??>
+<#--<#if user.email??>-->
 
 <h4> <-- <a href="/"> Back </a> </h4><hr>
 

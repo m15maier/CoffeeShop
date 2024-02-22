@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor     // конструктор со всеми полями
 @NoArgsConstructor      //конструктор без аргументов
 
-public class Product implements Principal {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,20 +43,16 @@ public class Product implements Principal {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private User user;
-    private LocalDateTime dateOfCreated;
 
-    @PrePersist
-    private void init() {
-        dateOfCreated = LocalDateTime.now();
-    }
 
-    @Override
-    public String getName() {
-        return null;
-    }
 
-    @Override
-    public boolean implies(Subject subject) {
-        return Principal.super.implies(subject);
-    }
+//    @Override
+//    public String getName() {
+//        return null;
+//    }
+//
+//    @Override
+//    public boolean implies(Subject subject) {
+//        return Principal.super.implies(subject);
+//    }
 }

@@ -34,7 +34,7 @@ public class CartServiceImpl implements CartService {
         Cart cartEntity = new Cart();   // создаётся новый продукт
         cartEntity.setQuantity(quantity);   // устанавливается количество продукта в этой корзине
 
-        Optional<User> userOptional = userRepository.findById(userId);     // поиск пользователя по идентификатору
+        Optional<User> userOptional = userRepository.findById(Long.valueOf(userId));     // поиск пользователя по идентификатору
         if (!userOptional.isPresent()) {    // если не найден, то выбрасывается исключение
             throw new EntityNotFoundException("not found");
     }

@@ -38,7 +38,7 @@ public class Security implements UserDetails {
 
     @Getter
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
 
     private final static String ADDITIONAL_STRING = "ROLE_";
 
@@ -55,9 +55,7 @@ public class Security implements UserDetails {
         return password;
     }
     @Override
-    public String getUsername() {
-        return login;
-    }
+    public String getUsername() { return login; }
 
     @Override
     public boolean isAccountNonExpired() {

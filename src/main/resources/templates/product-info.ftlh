@@ -13,7 +13,7 @@
 <b>Price: </b> ${product.price}<br>
 
 <form action="/product/delete/${product.id}" method="post">
-<#--    <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />-->
+<#--    <input type="hidden" name="csrfToken" value="${_csrf.token}" />-->
     <input type="submit" value="Delete"/>
 </form>
 

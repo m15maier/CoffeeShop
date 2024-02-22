@@ -7,7 +7,6 @@ import ee.coffee.coffeeshop.repositories.UserRepository;
 import ee.coffee.coffeeshop.services.interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -30,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
     public void saveProduct(Product product, Principal principal) throws IOException {
         product.setUser(getUserByPrincipal(principal));
 
-        log.info("Saving new Product. Title: {}; Email: {}", product.getTitle(), product.getUser().getUser_name());
+        log.info("Saving new Product");
         Product productFromDb = productRepository.save(product);
         productRepository.save(product);
     }
@@ -40,12 +39,12 @@ public class ProductServiceImpl implements ProductService {
         return userRepository.findByEmail(principal.getName());
     }
     @Override
-    public void deleteProduct(Long id) {
-        productRepository.deleteById(Math.toIntExact(id));
+    public void deleteProduct(Long product_id) {
+        productRepository.deleteById(Math.toIntExact(product_id));
     }
 
     @Override
-    public Product getProductById(Long id) {
-        return productRepository.findById(Math.toIntExact(id)).orElse(null);
+    public Product getProductById(Long product_id) {
+        return productRepository.findById(Math.toIntExact(product_id)).orElse(null);
     }
 }

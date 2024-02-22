@@ -23,8 +23,7 @@ public class UserController {
 
     // получает идентификатор пользователя из объекта UserDetails
     @GetMapping(value = "/login")
-    public String saveUser() {
-        return "/login";
+    public String login() { return "/login";
     }
 
     @GetMapping(value = "/registration")

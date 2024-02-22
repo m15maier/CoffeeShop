@@ -19,7 +19,7 @@
 
 <h1> Create new item </h1>
 
-<form action="/products/create" method="post" enctype="multipart/form-data">
+<form action="/product/create" method="post" enctype="multipart/form-data">
     ID: <label><input type="text" name="id"/></label><br><br>
     Title: <label><input type="text" name="title"/></label><br><br>
     Description: <label><input type="text" name="description"/></label><br><br>

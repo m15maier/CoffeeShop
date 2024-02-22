@@ -23,7 +23,7 @@ public class OrderController {
 
     @PostMapping(value = "/user/order/add")
     public void addOrder(@RequestBody OrderDTO orderDTO, @AuthenticationPrincipal UserDetails userDetails) {
-        Integer userId = ((Security) userDetails).getUserId();
+        Integer userId = Math.toIntExact(((Security) userDetails).getUserId());
         orderService.saveOrder(orderDTO.getPaymentMethod(), orderDTO.getDeliveryMethod(), userId);
     }
 

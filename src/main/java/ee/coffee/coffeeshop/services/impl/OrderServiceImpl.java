@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
         order.setDeliveryType(String.valueOf(deliveryType));    // передача типа доставки заказа
         order.setOrderStatus(String.valueOf(OrderStatus.ACTIVE));    // автоматически присваевается статус
 
-        Optional<User> userOptional = userRepository.findById(userId);
+        Optional<User> userOptional = userRepository.findById(Long.valueOf(userId));
         if (userOptional.isEmpty()) {
             throw new EntityNotFoundException("User not found");
         }

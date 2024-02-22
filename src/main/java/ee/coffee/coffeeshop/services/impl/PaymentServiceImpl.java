@@ -20,8 +20,8 @@ private final UserRepository userRepository;
 
     @Override
     public void sharePayment(Long fromId, Long toId, Integer countOfPayment) {
-        Optional<User> fromUserOptional = userRepository.findById(fromId.intValue());
-        Optional<User> toUserOptional = userRepository.findById(toId.intValue());
+        Optional<User> fromUserOptional = userRepository.findById((long) fromId.intValue());
+        Optional<User> toUserOptional = userRepository.findById((long) toId.intValue());
 
         if(fromUserOptional.isPresent() && toUserOptional.isPresent()) {
             User fromUser = fromUserOptional.get();

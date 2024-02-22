@@ -1,14 +1,19 @@
 package ee.coffee.coffeeshop.configurations;
 
+import ee.coffee.coffeeshop.entity.Security;
+import ee.coffee.coffeeshop.repositories.SecurityRepository;
+import ee.coffee.coffeeshop.services.impl.CustomUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -16,12 +21,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity  // указывает на то, что класс является конфигурацией безопасности для веб-приложения
 @Configuration      // указывает на то, что класс является конфигурационным классом
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration {
-
+//    private final CustomUserDetailsServiceImpl customUserDetailsServiceImpl;
 
             //     метод для настройки безопасности приложения
     @Bean   // указывает на то, что метод возвращает экземпляр объекта, который будет управлять фильтрами безопасности
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)   // отключение банковской защиты от CSRF атак
                 .cors(AbstractHttpConfigurer::disable)   // отключение защиты от межсайтовых атак
@@ -46,16 +52,16 @@ public class WebSecurityConfiguration {
 
 
  //    метод для аутентификации и авторизации пользователей
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails userDetails =
-        User.builder()
-                .username("admin@gmail.com")
-                .password("admin")
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(userDetails);
-}
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails userDetails =
+//        User.builder()
+//                .username("admin@gmail.com")
+//                .password("admin")
+//                .roles("ADMIN")
+//                .build();
+//        return new InMemoryUserDetailsManager(userDetails);
+//}
 
 
 
