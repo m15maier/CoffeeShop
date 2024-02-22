@@ -12,7 +12,7 @@
     Email: <label><input type="email" name="email" /></label><br><br>
     Phone Number: <label><input type="text" name="phone" /></label><br><br>
     Password: <label><input type="password" name="password" /></label><br><br>
-    <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />
+<#--    <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />-->
     <input type="submit" value="Sign In" />
 
 </form>

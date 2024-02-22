@@ -38,16 +38,21 @@ public class ProductController {
         return "product-info";
     }
 
-
+    @GetMapping(value = "/product-create")
+    public String createProduct (@RequestParam(name = "product_title", required = false) String title, Principal principal, Model model) {
+        model.addAttribute("product-create", productService.listProducts(title));
+        model.addAttribute("user", productService.getUserByPrincipal(principal));
+        return "product-create";
+    }
     // только с ролью админа
 
 //    @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping(value = "/products/create")
-    public String createProduct(Product product, Product principal) throws IOException {
-        productService.saveProduct(principal, product);
-        return "product-create";
+//    @PostMapping(value = "/products/create")
+//    public String createProduct(Product product, Product principal) throws IOException {
+//        productService.saveProduct(principal, product);
+//        return "redirect:/";
+//    }
 
-    }
 //    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping(value = "/products/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {

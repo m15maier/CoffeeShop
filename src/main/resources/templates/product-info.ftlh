@@ -12,14 +12,9 @@
 <b>Size: </b> ${product.size}<br>
 <b>Price: </b> ${product.price}<br>
 
-<form action="/product/delete-from-cart/${product.id}" method="post">
-<#--    <input type="hidden" name="csrfToken" value="{% csrf_token %}" />-->
+<form action="/product/delete/${product.id}" method="post">
+<#--    <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />-->
     <input type="submit" value="Delete"/>
-</form>
-
-<form action="/product/add-to-cart/${product.id}" method="post">
-<#--    <input type="hidden" name="csrfToken" value="{% csrf_token %}" />-->
-    <input type="submit" value="Add to cart"/>
 </form>
 
 

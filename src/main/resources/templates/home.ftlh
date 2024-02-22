@@ -28,8 +28,7 @@
 
 <div> <a href="/admin"> Admin Panel       .</a>
     <a href="/product-create"> NEW Product Create        .</a>
-    <a href="/cart"> Cart        .</a>
-    <a href="/order"> Order       .</a></div>
+
 
 <br><br>
 
