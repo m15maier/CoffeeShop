@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import javax.security.auth.Subject;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Table(name= "products")    // таблица
@@ -40,10 +42,23 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private ProductStatus productStatus;
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn
     private User user;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy= "product")    // cascadeType.ALL - при удалении товара, удалятся и фото; LAZY - сначала подгружается товар, пото фото
+    private List<Image> images = new ArrayList<>();
+    private Long preview_image_id;
+    private LocalDateTime localDateTime;
+
+    private void init() {
+        localDateTime = LocalDateTime.now();
+    }
+
+    public void addImageToProduct(Image image) {
+        image.setProduct(this);
+        images.add(image);
+    }
 
 
 //    @Override

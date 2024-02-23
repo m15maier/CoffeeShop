@@ -7,6 +7,8 @@
 <body>
 <H1>Product Details</H1>
 
+<img src="/images/${product.images.get(0)?if_exists}" height="60px/"><br><br>
+<img src="/images/${product.images.get(1)?if_exists}" height="60px/"><br><br>
 <b>Title: </b> ${product.title}<br>
 <b>Description: </b> ${product.description}<br>
 <b>Size: </b> ${product.size}<br>

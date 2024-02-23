@@ -51,42 +51,42 @@
 
 <h2>Home Page</h2>
 
-<#if user.email??>
-    <h3>Hello <i>${user.user_name}</i></h3>
-    <form action="/logout" method="post">
-        <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />
-        <input type="submit" value="Log out" /><br><br><br>
-    </form>
-<#else>
-    <a href="/login"> Log in</a>
-</#if>
-<hr>
+<#--<#if user.email??>-->
+<#--    <h3>Hello <i>${user.user_name}</i></h3>-->
+<#--    <form action="/logout" method="post">-->
+<#--        <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />-->
+<#--        <input type="submit" value="Log out" /><br><br><br>-->
+<#--    </form>-->
+<#--<#else>-->
+<#--    <a href="/login"> Log in</a>-->
+<#--</#if>-->
+<#--<hr>-->
 
-<#--<h4> <a href="/login"> Log in </a> </h4>-->
-<a href="/registration"> Registration </a>  <br><br>
+<#--&lt;#&ndash;<h4> <a href="/login"> Log in </a> </h4>&ndash;&gt;-->
+<#--<a href="/registration"> Registration </a>  <br><br>-->
 
-<div> <a href="/admin"> Admin Panel       .</a>
-    <a href="/product-create"> NEW Product Create        .</a>
+<#--<div> <a href="/admin"> Admin Panel       .</a>-->
+<#--    <a href="/product-create"> NEW Product Create        .</a>-->
 
 
-<br><br>
+<#--<br><br>-->
 
-<form action="/">
-    Search by title: <label>
-        <input type="text" name="title" >
-    </label>
-    <input type="submit" value="Search" /><br><br><br>
-</form>
+<#--<form action="/">-->
+<#--    Search by title: <label>-->
+<#--        <input type="text" name="title" >-->
+<#--    </label>-->
+<#--    <input type="submit" value="Search" /><br><br><br>-->
+<#--</form>-->
 
-<h3>All products:</h3><hr>
-<#list products as product>
-    <div>
-        <p><b>${product.title}</b> ${product.price}€ | <a href="/products/ ${product.id}"> Read more...</a></p>
-    </div>
-    <#else>
-    <h3>No items</h3>
-</#list>
-<hr>
+<#--<h3>All products:</h3><hr>-->
+<#--<#list products as product>-->
+<#--    <div>-->
+<#--        <p><b>${product.title}</b> ${product.price}€ | <a href="/products/ ${product.id}"> Read more...</a></p>-->
+<#--    </div>-->
+<#--    <#else>-->
+<#--    <h3>No items</h3>-->
+<#--</#list>-->
+<#--<hr>-->
 
 <#--<#if user.email??>-->
 

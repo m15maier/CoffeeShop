@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -16,7 +17,7 @@ import java.security.Principal;
 @RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
 public class ProductController {
 
-    @Autowired
+//    @Autowired
     private final ProductService productService;
 
 
@@ -41,10 +42,12 @@ public class ProductController {
     }
 
     @PostMapping(value = "/product/create")
-    public String createProduct (Product product, Principal principal) throws IOException{
-        productService.saveProduct(product, principal);
+    public String createProduct(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2, Product product, Principal principal) throws IOException {
+        productService.saveProduct(product, principal, file1, file2);
         return "redirect:/";
     }
+
+
     // только с ролью админа
 
 //    @PreAuthorize("hasAuthority('ADMIN')")
