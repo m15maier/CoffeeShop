@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 @Controller     // создаётся контроллер и управляется спрингом
@@ -23,7 +22,7 @@ public class UserController {
 
     // получает идентификатор пользователя из объекта UserDetails
     @GetMapping(value = "/login")
-    public String login() { return "/login";
+    public String login() { return "login";
     }
 
     @GetMapping(value = "/registration")
