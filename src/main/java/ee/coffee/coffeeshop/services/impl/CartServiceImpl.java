@@ -28,11 +28,11 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-   public void addProductToCart(Long productId, Integer quantity, Integer userId) {
+   public void addProductToCart(Long productId, Long quantity, Long userId) {
         // метод принимает три параметра
 
         Cart cartEntity = new Cart();   // создаётся новый продукт
-        cartEntity.setQuantity(quantity);   // устанавливается количество продукта в этой корзине
+        cartEntity.setQuantity(cartEntity.getQuantity());   // устанавливается количество продукта в этой корзине
 
         Optional<User> userOptional = userRepository.findById(Long.valueOf(userId));     // поиск пользователя по идентификатору
         if (!userOptional.isPresent()) {    // если не найден, то выбрасывается исключение
@@ -41,7 +41,7 @@ public class CartServiceImpl implements CartService {
         cartEntity.setUser(userOptional.get());
 
 
-        Optional<Product> productOptional = productRepository.findById(Integer.valueOf(Math.toIntExact(productId)));
+        Optional<Product> productOptional = productRepository.findById(Math.toIntExact(productId));
         if (!productOptional.isPresent()) {     // поиск продукта
             throw new EntityNotFoundException("not found");     // если не найден, то выбрасывается исключение
     }
@@ -52,8 +52,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-    public void deleteProductFromCart(Integer userId, Integer productId) {
-        Cart cartToDelete = CartRepository.getByQuantityAndUser_idAndProduct_id(userId, productId);
+    public void deleteProductFromCart(Long user_id, Long product_id) {
+        Cart cartToDelete = CartRepository.getByQuantityAndUser_idAndProduct_id(Math.toIntExact(user_id), Math.toIntExact(product_id));
         assert cartToDelete != null;
         cartRepository.delete(cartToDelete);
     }

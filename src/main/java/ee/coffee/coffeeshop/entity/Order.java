@@ -17,22 +17,22 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
-    private Long order_id;
+    private Long id;
 
     @Column(name = "order_price", nullable = false)
-    private Integer order_price;
+    private Integer price;
 
     @Column(name = "order_status")
-    private String orderStatus;
+    private String status;
 
     @Column(name = "payment_type")
-    private String paymentType;
+    private String payment_type;
 
     @Column(name = "delivery_type")
-    private String deliveryType;
+    private String delivery_type;
 
     @Column(name = "total_quantity")
-    private Integer totalQuantity;
+    private Integer quantity;
 
     @ManyToOne
     private User user;

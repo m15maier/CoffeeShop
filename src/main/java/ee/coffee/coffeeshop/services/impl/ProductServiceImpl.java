@@ -45,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
 
         log.info("Saving new Product {}", product.getTitle());
         Product productFromDb = productRepository.save(product);
-        productFromDb.setPreview_image_id(productFromDb.getImages().get(0).getImage_id());
+        productFromDb.setPreview_image_id(productFromDb.getImages().get(0).getId());
         productRepository.save(product);
     }
 
@@ -59,7 +59,7 @@ public class ProductServiceImpl implements ProductService {
 
     private Image toImageEntity(MultipartFile file) throws IOException {
         Image image = new Image();
-        image.setImage_name(file.getName());
+        image.setName(file.getName());
         image.setOriginal_file_name(file.getOriginalFilename());
         image.setContent_type(file.getContentType());
         image.setSize(file.getSize());

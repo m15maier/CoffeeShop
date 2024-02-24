@@ -14,16 +14,16 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_id")
-    private Long cart_id;
+    private Long id;
 
-    @Column(name = "quantity")
+    @Column(name = "cart_quantity")
     private Integer quantity;
 
     @Column(name = "user_id")
     private Integer user_id;
 
     @ManyToOne
-    @JoinColumn(name = "products")
+    @JoinColumn(name = "cart_products")
     private Product products;
 
     @ManyToOne

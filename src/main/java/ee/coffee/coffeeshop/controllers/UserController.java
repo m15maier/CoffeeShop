@@ -32,16 +32,14 @@ public class UserController {
 
     @PostMapping("/registration")
     public String createUser(User user, Map<String, Object> model) {
-        User userFromDb = userRepository.findByEmail(user.getUsername());
 
-        if (userFromDb != null) {   // если такой юзер есть в базе, то выдаит ошибку
+        boolean ok = userService.createUser(user);
+        if (! ok ) {
             model.put("errorMessage", "User exists!");
             return "registration";
         }
 
-        user.setActive(true);
-        user.setRoles(Collections.singleton(UserRole.USER));
-        userRepository.save(user);
+
 
         return "redirect:/login";
     }

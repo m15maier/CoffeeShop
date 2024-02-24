@@ -21,34 +21,34 @@ public class User implements UserDetails {
     @Id     // первичный ключ
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long user_id;
+    private Long id;
 
     @Column(name = "user_email", unique = true)
     private String email;
 
     @Column(name = "user_phone")
-    private String user_phone;
+    private String phone;
 
-    @Column(name = "user_name")
-    private String user_name;
+    @Column(name = "user_username")
+    private String username;
 
     @Column(name = "user_address")
-    private String user_address;
+    private String address;
 
     @Column(name = "user_payment")
     private int payment;
 
-    @Column(name = "count_of_payment")
-    private int count_of_payment;
+    @Column(name = "user_amount")
+    private int amount;
 
     @Column(name = "user_password")
     private String password;
 
     @Column(name = "user_active")
-    private boolean user_active;
+    private boolean active;
 
     @Column(name = "user_role")
-    private String user_role;
+    private String role;
 
     @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)   // fetch - загружает из таблицы, eager - только когда пользователь обратиться к таблице
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))   // аннотация описывает, что данное поле будет храниться в отдельной таблице, для которой не описывали метод
@@ -88,7 +88,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user_active;
+        return active;
     }
 
     public void setActive(boolean b) {

@@ -28,7 +28,7 @@
 //        @Test
 //        public void saveUser() {
 //            User ann = new User();
-//            ann.setUser_name("ann");
+//            ann.setUsername("ann");
 //            ann.setEmail("ann@gmail.com");
 //            ann.setUser_address("USA");
 //            ann.setUser_phone("1234567");
@@ -43,11 +43,11 @@
 //            List<User> users = new ArrayList<>();
 //
 //            User ann = new User();
-//            ann.setUserId(1L);
+//            ann.setId(1L);
 //            users.add(ann);
 //
 //            User mike = new User();
-//            ann.setUserId(2L);
+//            ann.setId(2L);
 //            users.add(mike);
 //
 //            when(userRepository.getAllUsers()).thenReturn(users);   // задаётся поведение мокито для метода
@@ -67,7 +67,7 @@
 ////        List<User> users = new ArrayList<>();
 ////
 ////        User jess = new User();
-////        jess.setUserId(3L);
+////        jess.setId(3L);
 ////        users.add(jess);
 ////
 ////        when(userRepository.findById(3)).thenReturn(Optional.of(jess));  // задаётся поведение мокито для метода

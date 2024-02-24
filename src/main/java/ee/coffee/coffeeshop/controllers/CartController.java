@@ -17,13 +17,13 @@ public class CartController {
     public CartService cartService;
     @PostMapping(value = "/user/cart/add")
     public void addProductToCart(@AuthenticationPrincipal UserDetails userDetails, @RequestBody CartDTO cartDTO) {
-        Integer userId = Math.toIntExact(((Security) userDetails).getUserId());
-        cartService.addProductToCart(cartDTO.getProductId(), cartDTO.getQuantity(), userId);
+        Integer userId = Math.toIntExact(((Security) userDetails).getId());
+        cartService.addProductToCart(cartDTO.getProductId(), cartDTO.getQuantity().longValue(), userId.longValue());
     }
 
     @DeleteMapping(value = "/user/cart/delete/{product_id}")
     public void deleteProductFromCart(@AuthenticationPrincipal UserDetails userDetails, @PathVariable(value = "product_id") Integer productId) {
-        Integer userId = Math.toIntExact(((Security) userDetails).getUserId());
-        cartService.deleteProductFromCart(userId, productId);
+        Integer userId = Math.toIntExact(((Security) userDetails).getId());
+        cartService.deleteProductFromCart(userId.longValue(), productId.longValue());
     }
 }

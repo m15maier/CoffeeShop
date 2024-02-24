@@ -30,7 +30,7 @@ public class SecurityConfig  {
 //        registry.addViewController("/").setViewName("products");
 //        registry.addViewController("/login").setViewName("login");
 //        registry.addViewController("/product-create").setViewName("product-create");
-        registry.addViewController("/admin").setViewName("admin");
+//        registry.addViewController("/admin").setViewName("admin");
     }
 
 
@@ -44,7 +44,7 @@ public class SecurityConfig  {
 
 //                  requests.requestMatchers("/admin/****").hasRole("ADMIN");
                     requests.requestMatchers("/", "/login", "/registration/**", "/user/**").permitAll();
-                  requests.anyRequest().permitAll();
+                    requests.anyRequest().permitAll();
 //                  requests.anyRequest().authenticated();
                 })
 

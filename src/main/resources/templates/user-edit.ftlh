@@ -5,12 +5,12 @@
 </head>
 
 <body>
-<H1>Edit user ${user.user_name} </H1>
+<H1>Edit user ${user.getUsername} </H1>
 <form action="/admin/user/edit/" method="post">
 
-    <b>Phone number: ${user.user_phone} </b><br>
+    <b>Phone number: ${user.getPhone} </b><br>
     <b>Email: ${user.getEmail} </b><br>
-    <b>Address: ${user.user_address} </b><br><br>
+    <b>Address: ${user.getAddress} </b><br><br>
 
 
     <#list roles as role>
@@ -22,7 +22,7 @@
 </#list>
 
 
-    <label><input type="hidden" value="${user.user_id}" name="userId" ></label>
+    <label><input type="hidden" value="${user.getId}" name="userId" ></label>
     <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
     <button type="submit">Save</button>
 

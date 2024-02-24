@@ -33,9 +33,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void saveOrder(PaymentMethod paymentType, DeliveryMethod deliveryType, Integer userId) {
         Order order = new Order();   // создание заказа
-        order.setPaymentType(String.valueOf(paymentType));  // передача типа оплаты в заказ
-        order.setDeliveryType(String.valueOf(deliveryType));    // передача типа доставки заказа
-        order.setOrderStatus(String.valueOf(OrderStatus.ACTIVE));    // автоматически присваевается статус
+        order.setPayment_type(String.valueOf(paymentType));  // передача типа оплаты в заказ
+        order.setDelivery_type(String.valueOf(deliveryType));    // передача типа доставки заказа
+        order.setStatus(String.valueOf(OrderStatus.ACTIVE));    // автоматически присваевается статус
 
         Optional<User> userOptional = userRepository.findById(Long.valueOf(userId));
         if (userOptional.isEmpty()) {
@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     @Override
     public void fillOrder(Order order) {     // добавление списка товаров в заказ
-        List<Cart> cartList = cartRepository.getListByUserId(order.getUser().getUser_id());
+        List<Cart> cartList = cartRepository.getListByUserId(order.getUser().getId());
         List<OrderProduct> orderProductList = new ArrayList<>();   // создаётся пустого списка товаров в заказе
         Integer totalQuantity = 0;  // создаётся переменную, сколько всего товаров в заказе
 
@@ -68,7 +68,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         order.setOrderProducts(orderProductList);    // сохраняется список товаров в заказе
-        order.setTotalQuantity(totalQuantity);      // сохраняет общее количество товаров в заказе
+        order.setQuantity(totalQuantity);      // сохраняет общее количество товаров в заказе
     }
 
     @Transactional
@@ -91,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
         if (orderById == null) {
             return;
         }
-        orderById.setOrderStatus(String.valueOf(orderStatus));
+        orderById.setStatus(String.valueOf(orderStatus));
         orderRepository.save(orderById);
     }
 }

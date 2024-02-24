@@ -13,7 +13,7 @@ import java.util.List;
 public interface CartRepository extends JpaRepository<Cart, Integer> {
 
     // запрос из базы данных
-    @Query(nativeQuery = true, value = "SELECT * FROM cart WHERE user_id = :user_id AND products = :product_id")
+    @Query(nativeQuery = true, value = "SELECT * FROM cart WHERE user_id = :user_id AND cart_products = :product_id")
     static Cart getByQuantityAndUser_idAndProduct_id(@Param(value = "user_id") Integer userId, @Param(value = "product_id") Integer products) {
         return null;
     }

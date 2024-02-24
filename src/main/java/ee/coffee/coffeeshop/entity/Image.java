@@ -15,15 +15,15 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "image_id")
-    private Long image_id;
+    private Long id;
 
     @Column(name = "image_name")
-    private String image_name;
+    private String name;
 
     @Column(name = "original_file_name")
     private String original_file_name;
 
-    @Column(name = "size")
+    @Column(name = "image_size")
     private Long size;
 
     @Column(name = "content_type")

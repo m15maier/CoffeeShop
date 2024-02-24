@@ -12,7 +12,7 @@
 <br><br><br>
 
 <#if user.email??>
-    <h3>Hello <i>${user.user_name}</i></h3>
+    <h3>Hello <i>${user.getUsername}</i></h3>
     <form action="/logout" method="post">
         <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
     <input type="submit" value="Log out" /><br><br><br>

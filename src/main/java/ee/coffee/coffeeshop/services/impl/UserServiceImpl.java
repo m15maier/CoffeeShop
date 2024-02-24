@@ -24,9 +24,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean createUser(User user) {
+        User userFromDb = userRepository.findByEmail(user.getUsername());
+
+        if (userFromDb != null) {   // если такой юзер есть в базе, то выдаит ошибку
+             return false;
+        }
+
         String email = user.getEmail();
         if (userRepository.findByEmail(email) != null) return false;
-        user.setUser_active(true);
+        user.setActive(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.getRoles().add(UserRole.USER);
         log.info("Saving new User with email: {}", email);

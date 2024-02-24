@@ -23,7 +23,7 @@ public class Security implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "product_id")
     private Long id;
 
     @Column(nullable = false, name = "login")
@@ -37,8 +37,8 @@ public class Security implements UserDetails {
     private UserRole role;
 
     @Getter
-    @Column(name = "user_id")
-    private Long userId;
+    @Column(name = "id")
+    private Long user_id;
 
     private final static String ADDITIONAL_STRING = "ROLE_";
 

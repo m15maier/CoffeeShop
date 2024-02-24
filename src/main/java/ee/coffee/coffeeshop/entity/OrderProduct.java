@@ -10,10 +10,10 @@ import lombok.Data;
 public class OrderProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "order_products_list_id")
     private Long id;
 
-    @Column(name = "quantity")
+    @Column(name = "order_products_list_quantity")
     private Integer quantity;
 
     @ManyToOne
