@@ -5,7 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.management.relation.Role;
 
-public enum UserRole implements GrantedAuthority {
+public enum UserRole implements GrantedAuthority {  // enum - перечисления
     USER,
     ADMIN;
 

@@ -14,7 +14,7 @@
 <#if user.email??>
     <h3>Hello <i>${user.user_name}</i></h3>
     <form action="/logout" method="post">
-<#--        <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />-->
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
     <input type="submit" value="Log out" /><br><br><br>
     </form>
     <#if user.isAdmin()>
@@ -25,13 +25,11 @@
 </#if>
     <hr>
 <hr>
-
+<a href="/registration">Sign up</a>
 <br><br>
-
-<form action="/products">
-    Search by title: <label>
-        <input type="text" name="title" >
-    </label>
+<form action="/products" method="post">
+    Search by title: <label><input type="text" name="title"></label>
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
     <input type="submit" value="Search" /><br><br><br>
 </form>
 
@@ -54,7 +52,7 @@
         Price: <label><input type="number" name="price"/></label><br><br>
         File1: <label><input type="file" name="file1"/></label><br><br>
         File2: <label><input type="file" name="file2"/></label><br><br>
-        <#--    <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />-->
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
         <input type="submit" value="Add item" />
 
     </form>

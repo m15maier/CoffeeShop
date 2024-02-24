@@ -20,6 +20,7 @@ public class ImageController {
     @GetMapping("/images/{id}")
     private ResponseEntity<?> getImageById(@PathVariable Long id) {
         Image image = imageRepository.findById(id).orElse(null);
+        assert image != null;
         return ResponseEntity.ok()
                 .header("fileName", image.getOriginal_file_name())
                 .contentType(MediaType.valueOf(image.getContent_type()))

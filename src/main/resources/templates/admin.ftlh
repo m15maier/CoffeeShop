@@ -17,13 +17,8 @@
             <th>${user.user_phone}</th>
             <th>${user.user_address}</th>
             <th><#list user.roles as user_role>${user_role}</#list></th>
-<#--            <th>-->
-<#--                <form action="/admin/user/ban/${user.userId}" method="post">-->
-<#--                    <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />-->
-<#--                    <input type="submit" value="Ban">-->
-<#--                </form>-->
-<#--            </th>-->
-            <th><a href="/admin/user/edit/${user.userId}">Edit</a></th>
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+            <th><a href="/admin/user/edit/${user.user_id}">Edit</a></th>
 
         </tr>
 

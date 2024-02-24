@@ -29,6 +29,7 @@ public class ProductServiceImpl implements ProductService {
     }
     @Override
     public void saveProduct(Product product, Principal principal, MultipartFile file1, MultipartFile file2) throws IOException {
+        product.setUser(getUserByPrincipal(principal));
         Image image1;
         Image image2;
 
@@ -38,11 +39,9 @@ public class ProductServiceImpl implements ProductService {
             product.addImageToProduct(image1);
         }
         if (file2.getSize() != 0) {
-            image2 = toImageEntity(file1);
+            image2 = toImageEntity(file2);
             product.addImageToProduct(image2);
         }
-
-        product.setUser(getUserByPrincipal(principal));
 
         log.info("Saving new Product {}", product.getTitle());
         Product productFromDb = productRepository.save(product);

@@ -51,68 +51,6 @@
 
 <h2>Home Page</h2>
 
-<#--<#if user.email??>-->
-<#--    <h3>Hello <i>${user.user_name}</i></h3>-->
-<#--    <form action="/logout" method="post">-->
-<#--        <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />-->
-<#--        <input type="submit" value="Log out" /><br><br><br>-->
-<#--    </form>-->
-<#--<#else>-->
-<#--    <a href="/login"> Log in</a>-->
-<#--</#if>-->
-<#--<hr>-->
-
-<#--&lt;#&ndash;<h4> <a href="/login"> Log in </a> </h4>&ndash;&gt;-->
-<#--<a href="/registration"> Registration </a>  <br><br>-->
-
-<#--<div> <a href="/admin"> Admin Panel       .</a>-->
-<#--    <a href="/product-create"> NEW Product Create        .</a>-->
-
-
-<#--<br><br>-->
-
-<#--<form action="/">-->
-<#--    Search by title: <label>-->
-<#--        <input type="text" name="title" >-->
-<#--    </label>-->
-<#--    <input type="submit" value="Search" /><br><br><br>-->
-<#--</form>-->
-
-<#--<h3>All products:</h3><hr>-->
-<#--<#list products as product>-->
-<#--    <div>-->
-<#--        <p><b>${product.title}</b> ${product.price}€ | <a href="/products/ ${product.id}"> Read more...</a></p>-->
-<#--    </div>-->
-<#--    <#else>-->
-<#--    <h3>No items</h3>-->
-<#--</#list>-->
-<#--<hr>-->
-
-<#--<#if user.email??>-->
-
-<#--<h1> Create new item </h1>-->
-
-<#--<form action="/products/create" method="post" enctype="multipart/form-data">-->
-<#--    ID: <label>-->
-<#--        <input type="text" name="id"/>-->
-<#--    </label><br><br>-->
-<#--    Title: <label>-->
-<#--        <input type="text" name="title"/>-->
-<#--    </label><br><br>-->
-<#--    Description: <label>-->
-<#--        <input type="text" name="description"/>-->
-<#--    </label><br><br>-->
-<#--    Size: <label>-->
-<#--        <input type="text" name="size"/>-->
-<#--    </label><br><br>-->
-<#--    Price: <label>-->
-<#--        <input type="number" name="price"/>-->
-<#--    </label><br><br>-->
-<#--    <input type="hidden" name="csrfToken" value="{{_csrf.token}}" />-->
-<#--    <input type="submit" value="Add item" />-->
-
-<#--</form>-->
-<#--</#if>-->
     <h4> <-- <a href="/"> Back </a> </h4>
 
 </body>

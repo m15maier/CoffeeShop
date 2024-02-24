@@ -24,36 +24,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-//
-//    @Transactional
-//    @Override
-//    public User saveUser(String name, String email, String address, String phone) {
-//
-//        User user = new User();
-//        user.setUser_name(name);
-//        user.setUser_email(email);
-//        user.setUser_address(address);
-//        user.setUser_phone(phone);
-//        userRepository.save(user);
-//
-//        return user;
-//    }
-//
-//    @Transactional
-//    @Override
-//    public void saveSecurity(Long userId, String userEmail, String userPassword) {
-//
-//        Security security = new Security();
-//        security.setUserId(Math.toIntExact(userId));
-//        security.setLogin(userEmail);
-//
-//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-//        String encodePassword = bCryptPasswordEncoder.encode(userPassword);
-//        security.setPassword(encodePassword);
-//
-//        security.setRole(UserRole.USER);
-//        securityRepository.save(security);
-//    }
+
 
     @Override
     public boolean createUser(User user) {
@@ -87,23 +58,5 @@ public class UserServiceImpl implements UserService {
     public List<User> list() {
         return userRepository.findAll();
     }
-
-
-
-
-//        @Transactional
-//    @Override
-//    public User getUserById(Long user_id) {
-//        return null;
-//    }
-
-//
-//
-//    public User getUserByPrincipal(Principal principal) {
-//        if (principal == null) return new User();
-//        return userRepository.findByEmail(principal.getName());
-//    }
-
-
 
 }

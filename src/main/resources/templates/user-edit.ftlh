@@ -22,8 +22,8 @@
 </#list>
 
 
-    <label><input type="hidden" value="${user.userId}" name="userId" ></label>
-<#--    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />-->
+    <label><input type="hidden" value="${user.user_id}" name="userId" ></label>
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
     <button type="submit">Save</button>
 
 

@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     @Override
     public void fillOrder(Order order) {     // добавление списка товаров в заказ
-        List<Cart> cartList = cartRepository.getListByUserId(order.getUser().getUserId());
+        List<Cart> cartList = cartRepository.getListByUserId(order.getUser().getUser_id());
         List<OrderProduct> orderProductList = new ArrayList<>();   // создаётся пустого списка товаров в заказе
         Integer totalQuantity = 0;  // создаётся переменную, сколько всего товаров в заказе
 

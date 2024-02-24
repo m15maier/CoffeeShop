@@ -42,14 +42,17 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private ProductStatus productStatus;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn
-    private User user;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy= "product")    // cascadeType.ALL - при удалении товара, удалятся и фото; LAZY - сначала подгружается товар, пото фото
     private List<Image> images = new ArrayList<>();
     private Long preview_image_id;
     private LocalDateTime localDateTime;
+
+
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn
+    private User user;
+
 
     private void init() {
         localDateTime = LocalDateTime.now();
@@ -61,13 +64,4 @@ public class Product {
     }
 
 
-//    @Override
-//    public String getName() {
-//        return null;
-//    }
-//
-//    @Override
-//    public boolean implies(Subject subject) {
-//        return Principal.super.implies(subject);
-//    }
 }

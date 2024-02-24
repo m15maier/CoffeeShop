@@ -17,16 +17,9 @@ import java.security.Principal;
 @RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
 public class ProductController {
 
-//    @Autowired
     private final ProductService productService;
 
 
-//    @GetMapping(value = "/")
-//    public String home(@RequestParam(name = "product_title", required = false) String title, Principal principal, Model model) {
-//        model.addAttribute("products", productService.listProducts(title));
-//        model.addAttribute("user", productService.getUserByPrincipal(principal));
-//        return "home";
-//    }
 
     @GetMapping(value = "/")
     public String products(@RequestParam(name = "product_title", required = false) String title, Principal principal, Model model) {
@@ -41,6 +34,11 @@ public class ProductController {
         return "product-info";
     }
 
+
+
+
+    // только с ролью админа
+
     @PostMapping(value = "/product/create")
     public String createProduct(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2, Product product, Principal principal) throws IOException {
         productService.saveProduct(product, principal, file1, file2);
@@ -48,14 +46,6 @@ public class ProductController {
     }
 
 
-    // только с ролью админа
-
-//    @PreAuthorize("hasAuthority('ADMIN')")
-//    @PostMapping(value = "/products/create")
-//    public String createProduct(Product product, Product principal) throws IOException {
-//        productService.saveProduct(principal, product);
-//        return "redirect:/";
-//    }
 
 //    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(value = "/product/delete/{id}")

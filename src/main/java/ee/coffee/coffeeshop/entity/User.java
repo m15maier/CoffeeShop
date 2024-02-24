@@ -21,7 +21,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long userId;
+    private Long user_id;
 
     @Column(name = "user_email", unique = true)
     private String user_email;
@@ -50,9 +50,9 @@ public class User implements UserDetails {
     @Column(name = "user_role")
     private String user_role;
 
-    @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
-    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)   // fetch - загружает из таблицы, eager - только когда пользователь обратиться к таблице
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))   // аннотация описывает, что данное поле будет храниться в отдельной таблице, для которой не описывали метод
+    @Enumerated(EnumType.STRING)    // хотим хранить в виде строки
     private Set<UserRole> roles = new HashSet<>();
 
 
@@ -84,11 +84,13 @@ public class User implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
-
     }
 
     @Override
     public boolean isEnabled() {
         return user_active;
+    }
+
+    public void setActive(boolean b) {
     }
 }
