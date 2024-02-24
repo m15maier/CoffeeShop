@@ -40,9 +40,9 @@ public class SecurityConfig  {
     private final CustomUserDetailsServiceImpl userDetailsServiceImpl;
 
     protected void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("products");
-        registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/product-create").setViewName("product-create");
+//        registry.addViewController("/").setViewName("products");
+//        registry.addViewController("/login").setViewName("login");
+//        registry.addViewController("/product-create").setViewName("product-create");
         registry.addViewController("/admin").setViewName("admin");
     }
 
