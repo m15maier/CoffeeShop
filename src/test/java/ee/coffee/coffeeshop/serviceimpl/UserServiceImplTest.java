@@ -29,7 +29,7 @@
 //        public void saveUser() {
 //            User ann = new User();
 //            ann.setUser_name("ann");
-//            ann.setUser_email("ann@gmail.com");
+//            ann.setEmail("ann@gmail.com");
 //            ann.setUser_address("USA");
 //            ann.setUser_phone("1234567");
 //

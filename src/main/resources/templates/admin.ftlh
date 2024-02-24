@@ -12,7 +12,7 @@
     </tr>
     <#list users as user>
         <tr>
-            <th>${user.user_email}</th>
+            <th>${user.getEmail}</th>
             <th>${user.user_name}</th>
             <th>${user.user_phone}</th>
             <th>${user.user_address}</th>

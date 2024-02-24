@@ -18,13 +18,13 @@ import java.util.Set;
 @AllArgsConstructor     // конструктор со всеми полями
 @NoArgsConstructor      //конструктор без аргументов
 public class User implements UserDetails {
-    @Id
+    @Id     // первичный ключ
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long user_id;
 
     @Column(name = "user_email", unique = true)
-    private String user_email;
+    private String email;
 
     @Column(name = "user_phone")
     private String user_phone;
@@ -69,7 +69,7 @@ public class User implements UserDetails {
     }
 
     @Override
-    public String getUsername() { return user_email; }
+    public String getUsername() { return email; }
 
     @Override
     public boolean isAccountNonExpired() {

@@ -9,7 +9,7 @@
 <form action="/admin/user/edit/" method="post">
 
     <b>Phone number: ${user.user_phone} </b><br>
-    <b>Email: ${user.user_email} </b><br>
+    <b>Email: ${user.getEmail} </b><br>
     <b>Address: ${user.user_address} </b><br><br>
 
 

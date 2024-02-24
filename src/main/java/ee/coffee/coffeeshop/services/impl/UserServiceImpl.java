@@ -6,15 +6,11 @@ import ee.coffee.coffeeshop.repositories.UserRepository;
 import ee.coffee.coffeeshop.services.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static ee.coffee.coffeeshop.enums.UserRole.ADMIN;
-import static ee.coffee.coffeeshop.enums.UserRole.USER;
 
 
 @Service
@@ -28,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean createUser(User user) {
-        String email = user.getUser_email();
+        String email = user.getEmail();
         if (userRepository.findByEmail(email) != null) return false;
         user.setUser_active(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
