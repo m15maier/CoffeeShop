@@ -49,7 +49,7 @@ public class Product {
     // LAZY - сначала подгружается товар, пото фото
     private List<Image> images = new ArrayList<>();
 
-    @Column
+    @ManyToOne
     private Image previewImage;
 
 

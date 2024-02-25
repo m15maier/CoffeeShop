@@ -1,6 +1,7 @@
 package ee.coffee.coffeeshop.repositories;
 
 import ee.coffee.coffeeshop.entity.Cart;
+import ee.coffee.coffeeshop.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,7 +24,7 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
 
     @Modifying
     @Query(nativeQuery = true, value = "DELETE FROM cart WHERE user_id = :user_id")
-    void deleteByUserId(@Param(value = "user_id") Integer userId);
+    void deleteByUserId(@Param(value = "user_id") User userId);
 }
 
 

@@ -31,21 +31,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public void saveOrder(PaymentMethod paymentType, DeliveryMethod deliveryType, Integer userId) {
+    public void saveOrder(PaymentMethod paymentType, DeliveryMethod deliveryType, User user) {
         Order order = new Order();   // создание заказа
 //        order.setPayment_type(String.valueOf(paymentType));  // передача типа оплаты в заказ
 //        order.setDelivery_type(String.valueOf(deliveryType));    // передача типа доставки заказа
 //        order.setStatus(String.valueOf(OrderStatus.ACTIVE));    // автоматически присваевается статус
 
-        Optional<User> userOptional = userRepository.findById(Long.valueOf(userId));
-        if (userOptional.isEmpty()) {
-            throw new EntityNotFoundException("User not found");
-        }
-
-        order.setUser(userOptional.get());  // устанавка клиента для этого заказа
+        order.setUser(user);  // устанавка клиента для этого заказа
         fillOrder(order);   // добавляется список товаров в заказе
         orderRepository.save(order);    // сохранение заказа в базу со всем списком товаров
-        cartRepository.deleteByUserId(userId);  // очищение таблицы
+        cartRepository.deleteByUserId(user);  // очищение таблицы
     }
 
     @Transactional

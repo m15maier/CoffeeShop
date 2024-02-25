@@ -2,7 +2,7 @@ package ee.coffee.coffeeshop.controllers;
 
 import ee.coffee.coffeeshop.dto.OrderDTO;
 import ee.coffee.coffeeshop.entity.Order;
-import ee.coffee.coffeeshop.entity.Security;
+import ee.coffee.coffeeshop.entity.User;
 import ee.coffee.coffeeshop.enums.OrderStatus;
 import ee.coffee.coffeeshop.services.interfaces.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +23,7 @@ public class OrderController {
 
     @PostMapping(value = "/user/order/add")
     public void addOrder(@RequestBody OrderDTO orderDTO, @AuthenticationPrincipal UserDetails userDetails) {
-        Integer userId = Math.toIntExact(((Security) userDetails).getId());
-        orderService.saveOrder(orderDTO.getPaymentMethod(), orderDTO.getDeliveryMethod(), userId);
+        orderService.saveOrder(orderDTO.getPaymentMethod(), orderDTO.getDeliveryMethod(), (User) userDetails);
     }
 
     // только с ролью админа
