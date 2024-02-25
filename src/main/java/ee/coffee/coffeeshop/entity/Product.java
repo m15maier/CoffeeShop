@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Table(name= "products")    // таблица
+@Table    // таблица
 @Data       // getter + setter + required args + to string + equals
 @Entity     // сущность jpa
 @AllArgsConstructor     // конструктор со всеми полями
@@ -44,25 +44,21 @@ public class Product {
     private ProductStatus productStatus;
 
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy= "product")    // cascadeType.ALL - при удалении товара, удалятся и фото; LAZY - сначала подгружается товар, пото фото
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy= "product")
+    // cascadeType.ALL - при удалении товара, удалятся и фото;
+    // LAZY - сначала подгружается товар, пото фото
     private List<Image> images = new ArrayList<>();
-    private Long preview_image_id;
-    private LocalDateTime localDateTime;
+
+    @Column
+    private Image previewImage;
 
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn
     private User user;
 
-
-    private void init() {
-        localDateTime = LocalDateTime.now();
-    }
-
     public void addImageToProduct(Image image) {
         image.setProduct(this);
         images.add(image);
     }
-
-
 }

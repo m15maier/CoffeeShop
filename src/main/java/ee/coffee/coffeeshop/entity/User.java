@@ -8,19 +8,16 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-@Table(name = "users")      // таблица
 @Data       // getter + setter + required args + to string + equals
 @Entity     // сущность jpa
 @AllArgsConstructor     // конструктор со всеми полями
 @NoArgsConstructor      //конструктор без аргументов
 public class User implements UserDetails {
     @Id     // первичный ключ
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     private Long id;
 
     @Column(unique = true)
@@ -58,7 +55,12 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        if(role == null) {
+            return Collections.EMPTY_LIST;
+        }
+        List<UserRole> list = new ArrayList<>(1);
+        list.add(role);
+        return list;
     }
 
     @Override

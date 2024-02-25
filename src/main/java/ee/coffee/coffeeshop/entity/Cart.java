@@ -5,23 +5,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "cart")   // таблица
+import java.util.List;
+
 @Data       // getter + setter + required args + to string + equals
 @Entity     // сущность jpa
-@AllArgsConstructor     // конструктор со всеми полями
-@NoArgsConstructor      //конструктор без аргументов
 public class Cart {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cart_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     private Long id;
 
     @ManyToOne
     private User user;
 
-    @ManyToOne
-    private Order order;
-
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private List<CartProduct> cartProducts;
 }
 
 

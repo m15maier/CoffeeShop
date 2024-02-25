@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name= "payment")    // таблица
+@Table    // таблица
 @Data       // getter + setter + required args + to string + equals
 @Entity     // сущность jpa
 @AllArgsConstructor     // конструктор со всеми полями
@@ -17,7 +17,6 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private Long id;
-
 
     @ManyToOne
     @JoinColumn

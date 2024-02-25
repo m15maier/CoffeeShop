@@ -14,11 +14,12 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-@Table(name = "security")   // таблица
+//@Table(name = "security")   // таблица
 @Data       // getter + setter + required args + to string + equals
-@Entity     // сущность jpa
+//@Entity     // сущность jpa
 @AllArgsConstructor     // конструктор со всеми полями
 @NoArgsConstructor      //конструктор без аргументов
+@Deprecated
 public class Security implements UserDetails {
 
     @Id
