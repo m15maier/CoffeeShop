@@ -3,6 +3,7 @@ package ee.coffee.coffeeshop.services.impl;
 import ee.coffee.coffeeshop.entity.Image;
 import ee.coffee.coffeeshop.entity.Product;
 import ee.coffee.coffeeshop.entity.User;
+import ee.coffee.coffeeshop.repositories.ImageRepository;
 import ee.coffee.coffeeshop.repositories.ProductRepository;
 import ee.coffee.coffeeshop.repositories.UserRepository;
 import ee.coffee.coffeeshop.services.interfaces.ProductService;
@@ -20,8 +21,9 @@ import java.util.List;
 @Slf4j
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductRepository productRepository;
+    private final ProductRepository productRepository;  // связующий элемент между базой
     private final UserRepository userRepository;
+    private final ImageRepository imageRepository;
 
     public final List<Product> listProducts(String title) {
         if (title != null) return productRepository.findByTitle(title);
@@ -29,25 +31,21 @@ public class ProductServiceImpl implements ProductService {
     }
     @Override
     public void saveProduct(Product product, Principal principal, MultipartFile file1, MultipartFile file2) throws IOException {
-        Image image1;
-        Image image2;
+        product = productRepository.save(product);
 
-        if (file1.getSize() != 0) {
-            image1 = toImageEntity(file1);
-            image1.setPreviewImage(true);
-            product.addImageToProduct(image1);
-        }
-        if (file2.getSize() != 0) {
-            image2 = toImageEntity(file2);
-            product.addImageToProduct(image2);
-        }
-
-        log.info("Saving new Product {}", product.getTitle());
-        Product productFromDb = productRepository.save(product);
-//        productFromDb.setId(productFromDb.getImages().get(0).getId());
-        productRepository.save(product);
+        addProductImage(product, file1, true);
+        addProductImage(product, file2, false);
     }
 
+    private void addProductImage(Product product, MultipartFile file, boolean previewImage) {
+        Image image = toImageEntity(file);
+        if (image == null) {
+            return;
+        }
+            image.setPreviewImage(previewImage);
+            image.setProduct(product);
+            imageRepository.save(image);
+    }
 
     @Override
     public User getUserByPrincipal(Principal principal) {
@@ -56,13 +54,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    private Image toImageEntity(MultipartFile file) throws IOException {
+    private Image toImageEntity(MultipartFile file) {
+        if (file == null || file.getSize() == 0) {      // если файла нет или он пустой, тогда возвращать null
+            return null;
+        }
+
         Image image = new Image();
         image.setName(file.getName());
         image.setOriginalFileName(file.getOriginalFilename());
         image.setContentType(file.getContentType());
         image.setSize(file.getSize());
-        image.setBytes(file.getBytes());
+        try {
+            image.setBytes(file.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return image;
     }
 

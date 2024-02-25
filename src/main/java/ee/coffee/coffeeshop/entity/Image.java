@@ -27,7 +27,7 @@ public class Image {
     @Column
     private boolean previewImage;
 
-    @Lob
+    @Lob    // large obj
     private byte[] bytes;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
