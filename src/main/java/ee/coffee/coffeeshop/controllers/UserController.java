@@ -4,6 +4,7 @@ package ee.coffee.coffeeshop.controllers;
 import ee.coffee.coffeeshop.entity.User;
 import ee.coffee.coffeeshop.enums.UserRole;
 import ee.coffee.coffeeshop.repositories.UserRepository;
+import ee.coffee.coffeeshop.services.interfaces.CreateUserExeption;
 import ee.coffee.coffeeshop.services.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -33,9 +34,10 @@ public class UserController {
     @PostMapping("/registration")
     public String createUser(User user, Map<String, Object> model) {
 
-        boolean ok = userService.createUser(user);
-        if (! ok ) {
-            model.put("errorMessage", "User exists!");
+        try {
+            userService.createUser(user);
+        } catch (CreateUserExeption error) {
+            model.put("errorMessage", error.getMessage());
             return "registration";
         }
         return "redirect:/login";
