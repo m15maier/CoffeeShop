@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 @Table    // таблица
 @Data       // getter + setter + required args + to string + equals
 @Entity     // сущность jpa
-@AllArgsConstructor     // конструктор со всеми полями
-@NoArgsConstructor      //конструктор без аргументов
 
 public class Payment {
 

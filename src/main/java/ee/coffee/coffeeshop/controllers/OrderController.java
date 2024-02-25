@@ -32,11 +32,13 @@ public class OrderController {
     public List<Order> getOrderList() {
         return orderService.getOrderList();
     }
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping(value = "/admin/order/{id}")
     public Order getOrderById(@PathVariable(name = "id") Long id) {
         return orderService.getOrderById(id);
     }
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping(value = "/admin/order/{id}/set_status/{order_status}")
     public void setOrderStatus(@PathVariable(name = "order_status") OrderStatus orderStatus, @PathVariable(name = "id") Long id, @PathVariable String order_status) {

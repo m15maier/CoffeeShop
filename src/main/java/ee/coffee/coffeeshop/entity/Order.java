@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+@Table(name = "orders")
 @Data       // getter + setter + required args + to string + equals
 @Entity     // сущность jpa
 public class Order {

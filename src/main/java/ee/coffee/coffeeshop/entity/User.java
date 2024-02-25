@@ -9,11 +9,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
-
+@Table(name = "users")
 @Data       // getter + setter + required args + to string + equals
 @Entity     // сущность jpa
-@AllArgsConstructor     // конструктор со всеми полями
-@NoArgsConstructor      //конструктор без аргументов
+
 public class User implements UserDetails {
     @Id     // первичный ключ
     @GeneratedValue(strategy = GenerationType.AUTO)
