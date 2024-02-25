@@ -16,16 +16,6 @@ public class Cart {
     @Column(name = "cart_id")
     private Long id;
 
-    @Column(name = "cart_quantity")
-    private Integer quantity;
-
-    @Column(name = "user_id")
-    private Integer user_id;
-
-    @ManyToOne
-    @JoinColumn(name = "cart_products")
-    private Product products;
-
     @ManyToOne
     private User user;
 

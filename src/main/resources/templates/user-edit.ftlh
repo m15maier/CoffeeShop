@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="ENG">
+<html lang="EN">
 <head>
     <title>Coffee shop</title>
 </head>
 
 <body>
-<H1>Edit user ${user.getUsername} </H1>
+<H1>Edit user ${user.getUsername()} </H1>
 <form action="/admin/user/edit/" method="post">
 
-    <b>Phone number: ${user.getPhone} </b><br>
-    <b>Email: ${user.getEmail} </b><br>
-    <b>Address: ${user.getAddress} </b><br><br>
+    <b>Phone number: ${user.getPhone()} </b><br>
+    <b>Email: ${user.getEmail()} </b><br>
+    <b>Address: ${user.getAddress()} </b><br><br>
 
 
     <#list roles as role>
@@ -22,7 +22,7 @@
 </#list>
 
 
-    <label><input type="hidden" value="${user.getId}" name="userId" ></label>
+    <label><input type="hidden" value="${user.getId()}" name="userId" ></label>
     <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
     <button type="submit">Save</button>
 

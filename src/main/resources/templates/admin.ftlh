@@ -12,13 +12,13 @@
     </tr>
     <#list users as user>
         <tr>
-            <th>${user.getEmail}</th>
-            <th>${user.getUsername}</th>
-            <th>${user.getPhone}</th>
-            <th>${user.getAddress}</th>
+            <th>${user.getEmail()}</th>
+            <th>${user.getUsername()}</th>
+            <th>${user.getPhone()}</th>
+            <th>${user.getAddress()}</th>
             <th><#list user.roles as user_role>${user_role}</#list></th>
             <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
-            <th><a href="/admin/user/edit/${user.getId}">Edit</a></th>
+            <th><a href="/admin/user/edit/${user.getId()}">Edit</a></th>
 
         </tr>
 

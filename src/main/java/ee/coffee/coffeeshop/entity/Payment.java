@@ -15,16 +15,11 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "payment_id")
+    @Column
     private Long id;
 
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user_id;
-
-    @ManyToOne
-    @JoinColumn(name = "count_of_payment")
-    private User count_of_payment;
-
+    @JoinColumn
+    private User user;
 }

@@ -1,41 +1,39 @@
 package ee.coffee.coffeeshop.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "image")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "image_id")
+    @Column
     private Long id;
 
-    @Column(name = "image_name")
+    @Column
     private String name;
 
-    @Column(name = "original_file_name")
-    private String original_file_name;
+    @Column
+    private String originalFileName;
 
-    @Column(name = "image_size")
+    @Column
     private Long size;
 
-    @Column(name = "content_type")
-    private String content_type;
+    @Column
+    private String contentType;
 
-    @Column(name = "is_preview_image")
-    private boolean is_preview_image;
+    @Column
+    private boolean previewImage;
 
     @Lob
     private byte[] bytes;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    private  Product product;
-
+    private Product product;
 }
+
+
+

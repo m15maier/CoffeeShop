@@ -32,7 +32,7 @@ public class CartServiceImpl implements CartService {
         // метод принимает три параметра
 
         Cart cartEntity = new Cart();   // создаётся новый продукт
-        cartEntity.setQuantity(cartEntity.getQuantity());   // устанавливается количество продукта в этой корзине
+//        cartEntity.setQuantity(cartEntity.getQuantity());   // устанавливается количество продукта в этой корзине
 
         Optional<User> userOptional = userRepository.findById(Long.valueOf(userId));     // поиск пользователя по идентификатору
         if (!userOptional.isPresent()) {    // если не найден, то выбрасывается исключение
@@ -45,8 +45,8 @@ public class CartServiceImpl implements CartService {
         if (!productOptional.isPresent()) {     // поиск продукта
             throw new EntityNotFoundException("not found");     // если не найден, то выбрасывается исключение
     }
-        cartEntity.setProducts(productOptional.get());   // Если пользователь и продукт найдены, то устанавливается пользователь и продукт для объекта Cart, после чего этот объект сохраняется в репозитории корзины cartRepository.
-        cartRepository.save(cartEntity);
+//        cartEntity.setProducts(productOptional.get());   // Если пользователь и продукт найдены, то устанавливается пользователь и продукт для объекта Cart, после чего этот объект сохраняется в репозитории корзины cartRepository.
+//        cartRepository.save(cartEntity);
     }
 
 

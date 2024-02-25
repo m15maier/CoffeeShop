@@ -33,9 +33,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void saveOrder(PaymentMethod paymentType, DeliveryMethod deliveryType, Integer userId) {
         Order order = new Order();   // создание заказа
-        order.setPayment_type(String.valueOf(paymentType));  // передача типа оплаты в заказ
-        order.setDelivery_type(String.valueOf(deliveryType));    // передача типа доставки заказа
-        order.setStatus(String.valueOf(OrderStatus.ACTIVE));    // автоматически присваевается статус
+//        order.setPayment_type(String.valueOf(paymentType));  // передача типа оплаты в заказ
+//        order.setDelivery_type(String.valueOf(deliveryType));    // передача типа доставки заказа
+//        order.setStatus(String.valueOf(OrderStatus.ACTIVE));    // автоматически присваевается статус
 
         Optional<User> userOptional = userRepository.findById(Long.valueOf(userId));
         if (userOptional.isEmpty()) {
@@ -58,17 +58,17 @@ public class OrderServiceImpl implements OrderService {
         for (Cart cart : cartList) {    // перебират все продукты в корзине поочереди
             OrderProduct orderProduct = new OrderProduct();     // для каждого продукта из корзины создаётся заказ
 
-            orderProduct.setProduct(cart.getProducts());    //добавляется продукт
-            orderProduct.setQuantity(cart.getQuantity());     //добавляется количество
-            orderProduct.setOrder(order);    // заполняется заказ
+//            orderProduct.setProduct(cart.getProducts());    //добавляется продукт
+//            orderProduct.setQuantity(cart.getQuantity());     //добавляется количество
+//            orderProduct.setOrder(order);    // заполняется заказ
 
             orderProductList.add(orderProduct);   // добавляется новый товар в список  товаров в заказе
 
             totalQuantity += orderProduct.getQuantity();  // добавляется по одному количество продуктов
         }
 
-        order.setOrderProducts(orderProductList);    // сохраняется список товаров в заказе
-        order.setQuantity(totalQuantity);      // сохраняет общее количество товаров в заказе
+//        order.setOrderProducts(orderProductList);    // сохраняется список товаров в заказе
+//        order.setQuantity(totalQuantity);      // сохраняет общее количество товаров в заказе
     }
 
     @Transactional
@@ -91,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
         if (orderById == null) {
             return;
         }
-        orderById.setStatus(String.valueOf(orderStatus));
+//        orderById.setStatus(String.valueOf(orderStatus));
         orderRepository.save(orderById);
     }
 }

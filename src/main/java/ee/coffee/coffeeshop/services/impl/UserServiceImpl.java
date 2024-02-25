@@ -24,18 +24,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean createUser(User user) {
-        User userFromDb = userRepository.findByEmail(user.getUsername());
+        User userFromDb = userRepository.findByEmail(user.getEmail());   // валидация, что такой юзер с таком мейлом не зарегистрирован
 
         if (userFromDb != null) {   // если такой юзер есть в базе, то выдаит ошибку
              return false;
         }
 
-        String email = user.getEmail();
-        if (userRepository.findByEmail(email) != null) return false;
         user.setActive(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(UserRole.USER);
-        log.info("Saving new User with email: {}", email);
+        user.setRole(UserRole.ADMIN);
+        log.info("Saving new User with email: {}", user.getEmail());
         userRepository.save(user);
         return true;
     }
@@ -46,10 +44,10 @@ public class UserServiceImpl implements UserService {
         Set<String> roles = Arrays.stream(UserRole.values())
                 .map(UserRole::name)
                 .collect(Collectors.toSet());
-        user.getRoles().add(UserRole.USER);
+        user.setRole(UserRole.ADMIN);
         for (String key : form.keySet()) {
             if (roles.contains(key)) {
-                user.getRoles().add(UserRole.valueOf(key));
+                user.setRole(UserRole.ADMIN);
             }
         }
         userRepository.save(user);

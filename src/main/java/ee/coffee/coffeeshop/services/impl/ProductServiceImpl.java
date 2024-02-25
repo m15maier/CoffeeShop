@@ -29,13 +29,12 @@ public class ProductServiceImpl implements ProductService {
     }
     @Override
     public void saveProduct(Product product, Principal principal, MultipartFile file1, MultipartFile file2) throws IOException {
-        product.setUser(getUserByPrincipal(principal));
         Image image1;
         Image image2;
 
         if (file1.getSize() != 0) {
             image1 = toImageEntity(file1);
-            image1.set_preview_image(true);
+            image1.setPreviewImage(true);
             product.addImageToProduct(image1);
         }
         if (file2.getSize() != 0) {
@@ -45,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
 
         log.info("Saving new Product {}", product.getTitle());
         Product productFromDb = productRepository.save(product);
-        productFromDb.setPreview_image_id(productFromDb.getImages().get(0).getId());
+//        productFromDb.setId(productFromDb.getImages().get(0).getId());
         productRepository.save(product);
     }
 
@@ -60,8 +59,8 @@ public class ProductServiceImpl implements ProductService {
     private Image toImageEntity(MultipartFile file) throws IOException {
         Image image = new Image();
         image.setName(file.getName());
-        image.setOriginal_file_name(file.getOriginalFilename());
-        image.setContent_type(file.getContentType());
+        image.setOriginalFileName(file.getOriginalFilename());
+        image.setContentType(file.getContentType());
         image.setSize(file.getSize());
         image.setBytes(file.getBytes());
         return image;

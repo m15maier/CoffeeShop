@@ -9,8 +9,9 @@
 <form action="/registration" method="post">
     Username: <input type="text" name="name"><br><br>
     Email: <input type="email" name="email"><br><br>
-    Phone Number: <input type="text" name="phoneNumber"><br><br>
     Password: <input type="password" name="password"><br><br>
+    Phone Number: <input type="text" name="phone"><br><br>
+    Address: <input type="text" name="address"><br><br>
     <input type="hidden" name="_csrf" value={{_csrf.token}}">
     <input type="submit" value="Sign up"/>
 </form>

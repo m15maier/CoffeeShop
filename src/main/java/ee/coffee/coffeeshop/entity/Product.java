@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.security.auth.Subject;
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,22 +24,22 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "product_id")
+    @Column
     private Long id;
 
-    @Column(name = "product_title")
+    @Column
     private String title;
 
-    @Column(name = "product_description", columnDefinition = "text")
+    @Column(length = 1024)
     private String description;
 
-    @Column(name = "product_size")
+    @Column
     private String size;
 
-    @Column(name = "product_price")
-    private int price;
+    @Column
+    private BigDecimal price;
 
-    @Column(name = "product_status")
+    @Column
     @Enumerated(EnumType.STRING)
     private ProductStatus productStatus;
 

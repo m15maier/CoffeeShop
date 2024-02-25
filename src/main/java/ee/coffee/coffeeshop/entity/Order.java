@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Collection;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Table(name = "orders") // таблица
@@ -16,23 +16,20 @@ import java.util.List;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
+    @Column
     private Long id;
 
-    @Column(name = "order_price", nullable = false)
-    private Integer price;
+    @Column(nullable = false)
+    private BigDecimal price;
 
-    @Column(name = "order_status")
-    private String status;
-
-    @Column(name = "payment_type")
-    private String payment_type;
-
-    @Column(name = "delivery_type")
-    private String delivery_type;
-
-    @Column(name = "total_quantity")
-    private Integer quantity;
+//    @Column
+//    private String status;
+//
+//    @Column
+//    private String payment_type;
+//
+//    @Column
+//    private String delivery_type;
 
     @ManyToOne
     private User user;

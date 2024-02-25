@@ -23,44 +23,37 @@ public class User implements UserDetails {
     @Column(name = "user_id")
     private Long id;
 
-    @Column(name = "user_email", unique = true)
+    @Column(unique = true)
     private String email;
 
-    @Column(name = "user_phone")
+    @Column
     private String phone;
 
-    @Column(name = "user_username")
+    @Column
     private String username;
 
-    @Column(name = "user_address")
+    @Column
     private String address;
 
-    @Column(name = "user_payment")
+    @Column
     private int payment;
 
-    @Column(name = "user_amount")
+    @Column
     private int amount;
 
-    @Column(name = "user_password")
+    @Column
     private String password;
 
-    @Column(name = "user_active")
+    @Column
     private boolean active;
 
-    @Column(name = "user_role")
-    private String role;
-
-    @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)   // fetch - загружает из таблицы, eager - только когда пользователь обратиться к таблице
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))   // аннотация описывает, что данное поле будет храниться в отдельной таблице, для которой не описывали метод
-    @Enumerated(EnumType.STRING)    // хотим хранить в виде строки
-    private Set<UserRole> roles = new HashSet<>();
-
-
+    @Column
+    private UserRole role;
 
     // security
 
     public boolean isAdmin() {
-        return roles.contains(UserRole.ADMIN);
+        return role == UserRole.ADMIN;
     }
 
     @Override

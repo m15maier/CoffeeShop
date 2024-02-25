@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ENG">
+<html lang="EN">
 <head>
     <title>Coffee shop</title>
 </head>

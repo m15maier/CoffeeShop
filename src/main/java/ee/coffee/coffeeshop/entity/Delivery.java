@@ -12,17 +12,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor      //конструктор без аргументов
 public class Delivery {
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "delivery_id")
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        @Column
         private Long id;
 
-        @Column(name = "delivery_status")
-        private String delivery_status;
+        @Column
+        private DeliveryStatus deliveryStatus;
+
+        @Column
+        private DeliveryMethod deliveryMethod;
 
         @ManyToOne
         private Order order;
 
-        @ManyToOne
-        private User user;
-    }
+        public User getUser() {
+        return order.getUser();
+        }
+}
 

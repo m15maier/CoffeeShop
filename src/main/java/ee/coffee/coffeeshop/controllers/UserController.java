@@ -38,21 +38,9 @@ public class UserController {
             model.put("errorMessage", "User exists!");
             return "registration";
         }
-
-
-
         return "redirect:/login";
     }
 
-
-//    @PostMapping(value = "/registration")
-//    public String createUser(User user, Model model) {
-//        if (!userService.createUser(user)) {
-//            model.addAttribute("errorMessage", "User with this email: " + user.getEmail() + " already exists");
-//            return "registration";
-//        }
-//        return "redirect:/login";
-//    }
 
     @GetMapping("/user/{user}")
     public String userInfo(@PathVariable("user") User user, Model model) {
