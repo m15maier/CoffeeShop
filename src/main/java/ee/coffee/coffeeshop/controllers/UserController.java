@@ -2,7 +2,6 @@ package ee.coffee.coffeeshop.controllers;
 
 
 import ee.coffee.coffeeshop.entity.User;
-import ee.coffee.coffeeshop.enums.UserRole;
 import ee.coffee.coffeeshop.repositories.UserRepository;
 import ee.coffee.coffeeshop.services.interfaces.CreateUserExeption;
 import ee.coffee.coffeeshop.services.interfaces.UserService;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.Map;
 
 @Controller     // создаётся контроллер и управляется спрингом

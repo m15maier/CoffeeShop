@@ -12,15 +12,12 @@
     <b>Email: ${user.getEmail()} </b><br>
     <b>Address: ${user.getAddress()} </b><br><br>
 
-
     <#list roles as role>
     <div>
-        <label><input type="checkbox" name="${role}" ${user.roles?seq_contains(role)?string("checked", "")} > ${role}></label>
+        <label><input type="checkbox" name="${role}" ${roles?seq_contains(role)?string("checked", "")} > ${role}></label>
     </div>
-<#else>
-    <h6> . . . . . .</h6>
-</#list>
 
+</#list>
 
     <label><input type="hidden" value="${user.getId()}" name="userId" ></label>
     <input type="hidden" name="_csrf" value="{{_csrf.token}}" />

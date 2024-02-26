@@ -2,6 +2,8 @@ package ee.coffee.coffeeshop.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Type;
+import org.springframework.transaction.annotation.Transactional;
 
 @Entity
 @Data

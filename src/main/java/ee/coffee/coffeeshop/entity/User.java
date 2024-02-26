@@ -1,10 +1,8 @@
 package ee.coffee.coffeeshop.entity;
 
-import ee.coffee.coffeeshop.enums.UserRole;
+import ee.coffee.coffeeshop.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -44,12 +42,12 @@ public class User implements UserDetails {
     private boolean active;
 
     @Column
-    private UserRole role;
+    private Role role;
 
     // security
 
     public boolean isAdmin() {
-        return role == UserRole.ADMIN;
+        return role == Role.ROLE_ADMIN;
     }
 
     @Override
@@ -57,14 +55,15 @@ public class User implements UserDetails {
         if(role == null) {
             return Collections.EMPTY_LIST;
         }
-        List<UserRole> list = new ArrayList<>(1);
-        list.add(role);
-        return list;
+        List<Role> roles = new ArrayList<>(1);
+        roles.add(role);
+        return roles;
     }
 
     @Override
-    public String getUsername() { return email; }
-
+    public String getUsername() {
+        return email;
+    }
     @Override
     public boolean isAccountNonExpired() {
         return true;

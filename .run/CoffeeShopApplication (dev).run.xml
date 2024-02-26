@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="CoffeeShopApplication (dev)" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="ee.coffee.coffeeshop.CoffeeShopApplication" />
+    <module name="CoffeeShop" />
+    <option name="PROGRAM_PARAMETERS" value="--spring.freemarker.template-loader-path=file:///$MODULE_DIR$/src/main/resources/templates --spring.freemarker.cache=false --spring.freemarker.prefer-file-system-access=true" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

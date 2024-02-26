@@ -7,8 +7,11 @@
 
 <body>
 <a href="/admin">Admin Panel</a>
-<a href="/product-create">NEW Product Create</a>
+<a href="/product/create">NEW Product Create</a>
 
+<br><br><br>
+
+<form action="/header"></form>
 <br><br><br>
 
 <#if user.email??>
@@ -40,7 +43,7 @@
 <h1>All products:</h1><hr>
 <#list products as product>
     <div>
-        <p><b>${product.title}</b> ${product.price}€   |    <a href="/product/${product.id}"> Read more...</a></p>
+        <p><b>${product.title}</b> ${product.price}€  |    <a href="/product/${product.id}"> Read more...</a></p>
     </div>
     <#else>
     <h3>No items</h3>
@@ -49,7 +52,6 @@
 
     <h1> Create new item </h1>
     <form action="/product/create" method="post" enctype="multipart/form-data">
-        ID: <label><input type="text" name="id" /></label><br><br>
         Title: <label><input type="text" name="title" /></label><br><br>
         Description: <label><input type="text" name="description" /></label><br><br>
         Size: <label><input type="text" name="size" /></label><br><br>
@@ -57,7 +59,7 @@
         File1: <label><input type="file" name="file1"/></label><br><br>
         File2: <label><input type="file" name="file2"/></label><br><br>
         <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
-        <input type="submit" value="Add item" />
+        <input type="submit" value="Create" />
 
     </form>
 

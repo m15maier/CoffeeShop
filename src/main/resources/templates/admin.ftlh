@@ -16,9 +16,15 @@
             <th>${user.getUsername()}</th>
             <th>${user.getPhone()}</th>
             <th>${user.getAddress()}</th>
-            <th><#list user.roles as user_role>${user_role}</#list></th>
+            <th>${user.getRole()}</th>
+
+
+<#--            <th><#if user.active>true<#else>false</#if></th>-->
+<#--            <th><#list users as user>${user}</#list></th>-->
+
+<#--            <th><#list roles as userRole>${userRole}</#list></th>-->
             <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
-            <th><a href="/admin/user/edit/${user.getId()}">Edit</a></th>
+            <th><a href="/admin/user/edit/${user.getId()}">More information</a></th>
 
         </tr>
 
