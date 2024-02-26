@@ -1,10 +1,9 @@
 package ee.coffee.coffeeshop.controllers;
 
 import ee.coffee.coffeeshop.entity.User;
-import ee.coffee.coffeeshop.enums.UserRole;
+import ee.coffee.coffeeshop.enums.Role;
 import ee.coffee.coffeeshop.services.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.support.BeanDefinitionDsl;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +30,7 @@ public class AdminController {
     @GetMapping("/admin/user/edit/{user}")
     public String userEdit(@PathVariable("user") User user, Model model) {
         model.addAttribute("user", user);
-        model.addAttribute("roles", UserRole.values());
+        model.addAttribute("roles", Role.values());
         return "user-edit";
     }
 

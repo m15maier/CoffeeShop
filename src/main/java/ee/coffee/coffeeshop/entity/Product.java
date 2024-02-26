@@ -2,14 +2,9 @@ package ee.coffee.coffeeshop.entity;
 
 import ee.coffee.coffeeshop.enums.ProductStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.security.auth.Subject;
 import java.math.BigDecimal;
-import java.security.Principal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

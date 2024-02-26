@@ -3,9 +3,7 @@ package ee.coffee.coffeeshop.entity;
 import ee.coffee.coffeeshop.enums.DeliveryMethod;
 import ee.coffee.coffeeshop.enums.DeliveryStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data       // getter + setter + required args + to string + equals
 @Entity     // сущность jpa

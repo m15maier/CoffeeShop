@@ -1,7 +1,6 @@
 package ee.coffee.coffeeshop.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;

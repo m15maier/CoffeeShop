@@ -1,9 +1,7 @@
 package ee.coffee.coffeeshop.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Table    // таблица
 @Data       // getter + setter + required args + to string + equals

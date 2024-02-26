@@ -11,7 +11,6 @@ import ee.coffee.coffeeshop.repositories.CartRepository;
 import ee.coffee.coffeeshop.repositories.OrderRepository;
 import ee.coffee.coffeeshop.repositories.UserRepository;
 import ee.coffee.coffeeshop.services.interfaces.OrderService;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

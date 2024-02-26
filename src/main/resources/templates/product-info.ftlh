@@ -14,7 +14,7 @@
 <b>Price: </b> ${product.price}<br>
 
 <#list images as img>
-    <img src="/img/${img.id}" height="60px"/><br><br>
+    <img src="/image/${img.id}" height="60px"/><br><br>
 </#list>
 
 <form action="/product/delete/${product.id}" method="post">
