@@ -10,6 +10,9 @@
 <a href="/product/create">NEW Product Create</a>
 
 
+<form action="/header"></form>
+<br><br><br>
+
 <#if user.email??>
     <h3>Hello <i>${user.getUsername()}</i></h3>
     <form action="/logout" method="post">

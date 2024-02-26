@@ -83,7 +83,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return active;
     }
-
-    public void setActive(boolean b) {
-    }
 }
