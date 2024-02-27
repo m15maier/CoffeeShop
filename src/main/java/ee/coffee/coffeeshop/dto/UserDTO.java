@@ -20,9 +20,6 @@ public class UserDTO {
     @Email(message ="Please provide a valid email address")
     private String email;
 
-//    @NotBlank(message ="The field must not be blank")
-//    private String password;
-
     @NotBlank(message ="First name must not be blank")
     private String address;
 

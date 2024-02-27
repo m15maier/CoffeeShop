@@ -17,7 +17,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="role" class="form-label">Role</label>
-                    <select class="form-select" aria-label="Role"name="role">
+                    <select class="form-select" aria-label="Role" name="role">
                         <#list Role as role>
                             <option value="${role}" <#if user.role == role>selected</#if>>${role}</option>
                         </#list>
