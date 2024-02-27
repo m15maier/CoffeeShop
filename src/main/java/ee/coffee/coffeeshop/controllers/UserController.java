@@ -38,7 +38,7 @@ public class UserController {
             model.put("errorMessage", error.getMessage());
             return "registration";
         }
-        return "redirect:/login";
+        return "redirect:/login?signUpOk";
     }
 
 

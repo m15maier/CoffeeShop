@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import javax.sql.DataSource;
 
@@ -27,6 +28,7 @@ public class SecurityConfig  {
     private final CustomUserDetailsServiceImpl customUserDetailsServiceImpl;
 
     protected void addViewControllers(ViewControllerRegistry registry) {
+      
 //        registry.addViewController("/").setViewName("products");
 //        registry.addViewController("/login").setViewName("login");
 //        registry.addViewController("/product-create").setViewName("product-create");
@@ -50,7 +52,7 @@ public class SecurityConfig  {
 
 //                .formLogin(AbstractHttpConfigurer::disable);    // отключение формы входа
                 .formLogin(form -> form
-                        .loginPage("/login").successForwardUrl("/")
+                        .loginPage("/login")
                         .permitAll()
                 );
                 http.httpBasic(httpBasic -> httpBasic.init(http));
