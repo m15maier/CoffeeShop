@@ -1,6 +1,6 @@
 package ee.coffee.coffeeshop.controllers;
 
-import ee.coffee.coffeeshop.dto.UserDTO;
+import ee.coffee.coffeeshop.dto.UserSignupDTO;
 import ee.coffee.coffeeshop.entity.User;
 import ee.coffee.coffeeshop.enums.Role;
 import ee.coffee.coffeeshop.services.interfaces.CoffeeShopExeption;
@@ -29,14 +29,14 @@ public class AdminUserController extends AbstractController {
     
     @GetMapping(LIST)
     public String list(Model model) {
-        setList(model, userService.list());
+//        setList(model, userService.list());
         return LIST;
     }
     
     @GetMapping(EDIT + "/{id}")
     public String edit(Model model, @PathVariable Long id) {
         User user = userService.getById(id);
-        UserDTO dto = new UserDTO();
+        UserSignupDTO dto = new UserSignupDTO();
         BeanUtils.copyProperties(user, dto);
         model.addAttribute(USER, dto);
         addEnumConstants(model, Role.class);
@@ -48,17 +48,17 @@ public class AdminUserController extends AbstractController {
     }
     
     @PostMapping( EDIT + "/{id}")
-    public String save(Model model, @ModelAttribute(USER) @Valid UserDTO dto, BindingResult bindingResult) {
-        if(checkErrors(model, bindingResult)) {
-            addEnumConstants(model, Role.class);
-            return EDIT;
-        }
-        try {
-            userService.updateUser(dto);
-        } catch(CoffeeShopExeption e) {
-            setErrorMessage(model, e);
-            return EDIT;
-        }
+    public String save(Model model, @ModelAttribute(USER) @Valid UserSignupDTO dto, BindingResult bindingResult) {
+//        if(checkErrors(model, bindingResult)) {
+//            addEnumConstants(model, Role.class);
+//            return EDIT;
+//        }
+//        try {
+//            userService.updateUser(dto);
+//        } catch(CoffeeShopExeption e) {
+//            setErrorMessage(model, e);
+//            return EDIT;
+//        }
         return redirect(LIST);
     }
     

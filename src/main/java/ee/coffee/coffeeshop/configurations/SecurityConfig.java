@@ -1,5 +1,6 @@
 package ee.coffee.coffeeshop.configurations;
 
+import ee.coffee.coffeeshop.enums.Role;
 import ee.coffee.coffeeshop.services.impl.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,20 +30,14 @@ public class SecurityConfig  {
         http
                 .csrf(AbstractHttpConfigurer::disable)   // отключение банковской защиты от CSRF атак
                 .cors(AbstractHttpConfigurer::disable)   // отключение защиты от межсайтовых атак
-                .authorizeHttpRequests((requests) -> {      // настройка правил доступа для различных URL-адресов
-
-//                  requests.requestMatchers("/admin/****").hasRole("ADMIN");
-                    requests.requestMatchers("/", "/login", "/registration/**", "/user/**").permitAll();
-                    requests.anyRequest().permitAll();
-//                  requests.anyRequest().authenticated();
+                .authorizeHttpRequests((request) -> {      // настройка правил доступа для различных URL-адресов
+                    request.requestMatchers("/admin/****").hasRole("ROLE_" + Role.ADMIN.name());
+                    request.requestMatchers("/user/**").hasRole("ROLE_" + Role.USER.name());
+                    request.requestMatchers("/public/***").permitAll();
+                    request.anyRequest().permitAll();
                 })
-
-//                .formLogin(AbstractHttpConfigurer::disable);    // отключение формы входа
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .permitAll()
-                );
-                http.httpBasic(httpBasic -> httpBasic.init(http));
+                .formLogin(formLogin -> formLogin.disable()) // отключение формы входа
+                .httpBasic(httpBasic -> httpBasic.init(http));
         return http.build();
     }
 

@@ -1,39 +1,44 @@
 package ee.coffee.coffeeshop.controllers;
 
 
+import ee.coffee.coffeeshop.dto.UserInfoDTO;
+import ee.coffee.coffeeshop.dto.UserSignupDTO;
 import ee.coffee.coffeeshop.entity.User;
 import ee.coffee.coffeeshop.services.interfaces.CoffeeShopExeption;
 import ee.coffee.coffeeshop.services.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller     // создаётся контроллер и управляется спрингом
+@RestController     // создаётся контроллер и управляется спрингом
 @RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
 public class UserController extends AbstractController {
 
     private final UserService userService;
 
-    // получает идентификатор пользователя из объекта UserDetails
-    @GetMapping(value = "/login")
-    public String login() {
-        return "login";
+    @GetMapping(value = "/user/current")
+    public UserInfoDTO currentUser(@AuthenticationPrincipal UserDetails userDetails) {
+        return new UserInfoDTO();
     }
 
-    @GetMapping(value = "/registration")
-    public String registration() {
-        return "registration";
+    @PostMapping(value = "/public/signup")
+    public void signup(@RequestBody @Validated UserSignupDTO data) throws CoffeeShopExeption {
+        userService.signUp(data);
     }
 
     @PostMapping("/registration")
-    public String createUser(User user, Model model) {
+    public String createUser(User user) {
         try {
             userService.createUser(user);
         } catch (CoffeeShopExeption error) {
-            setErrorMessage(model, error);
+//            setErrorMessage(model, error);
             return "registration";
         }
         return "redirect:/login?signUpOk";

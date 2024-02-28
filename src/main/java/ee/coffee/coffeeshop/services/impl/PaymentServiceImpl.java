@@ -27,8 +27,8 @@ private final UserRepository userRepository;
             User fromUser = fromUserOptional.get();
             User toUser = toUserOptional.get();     // передача оплаты
 
-            fromUser.setPayment(fromUser.getPayment() - countOfPayment);    // обновление оплаты
-            toUser.setPayment(toUser.getPayment() + countOfPayment);
+//            fromUser.setPayment(fromUser.getPayment() - countOfPayment);    // обновление оплаты
+//            toUser.setPayment(toUser.getPayment() + countOfPayment);
 
             userRepository.save(fromUser);
 

@@ -25,16 +25,10 @@ public class User {
     private String phone;
 
     @Column
-    private String username;
+    private String name;
 
     @Column
     private String address;
-
-    @Column
-    private int payment;
-
-    @Column
-    private int amount;
 
     @Column
     private String password;

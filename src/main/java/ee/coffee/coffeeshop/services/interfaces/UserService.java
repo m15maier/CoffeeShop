@@ -1,10 +1,9 @@
 package ee.coffee.coffeeshop.services.interfaces;
 
-import ee.coffee.coffeeshop.dto.UserDTO;
+import ee.coffee.coffeeshop.dto.UserSignupDTO;
 import ee.coffee.coffeeshop.entity.User;
 
 import java.util.List;
-import java.util.Map;
 
 public interface UserService {
 
@@ -16,5 +15,7 @@ public interface UserService {
     
     void deleteUser(Long id);
     
-    void updateUser(UserDTO user) throws CoffeeShopExeption;
+    void updateUser(UserSignupDTO user) throws CoffeeShopExeption;
+    
+    void signUp(UserSignupDTO data) throws CoffeeShopExeption;
 }

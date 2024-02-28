@@ -1,7 +1,6 @@
 package ee.coffee.coffeeshop.controllers;
 
 import ee.coffee.coffeeshop.entity.Product;
-import ee.coffee.coffeeshop.services.impl.UserDetailsServiceImpl;
 import ee.coffee.coffeeshop.services.interfaces.CoffeeShopExeption;
 import ee.coffee.coffeeshop.services.interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -28,14 +27,14 @@ public class AdminProductController extends AbstractController {
 
     @GetMapping(LIST)
     public String list(Model model) {
-        setList(model, productService.listProducts());
+//        setList(model, productService.listProducts());
         return LIST;
     }
 
     @GetMapping(EDIT + "/{id}")
     public String edit(Model model, @PathVariable Long id) {
-        Product product = id == NEW_ENTITY_ID ? new Product() : productService.getProductById(id);
-        model.addAttribute(product);
+//        Product product = id == NEW_ENTITY_ID ? new Product() : productService.getProductById(id);
+//        model.addAttribute(product);
         return EDIT;
     }
     
@@ -49,11 +48,14 @@ public class AdminProductController extends AbstractController {
             productService.saveProduct(getUser(userDetails), product, file1, file2);
         } catch(CoffeeShopExeption e) {
             model.addAttribute(product);
-            setErrorMessage(model, e);
+//            setErrorMessage(model, e);
             return EDIT;
         }
         return redirect(LIST);
     }
+    
+    
+    
     @PostMapping("/admin/product/delete/{id}")
     public String delete(@PathVariable Long id) {
         productService.deleteProduct(id);

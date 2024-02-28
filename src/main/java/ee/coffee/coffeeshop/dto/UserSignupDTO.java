@@ -1,33 +1,29 @@
 package ee.coffee.coffeeshop.dto;
 
-import ee.coffee.coffeeshop.enums.Role;
-import jakarta.persistence.Id;
-import lombok.Data;
-
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
 @Data   // getter + setter + required args + to string + equals
-public class UserDTO {
-    
-    @Id
-    private Long id;
+public class UserSignupDTO {
     
     @NotBlank(message ="Name must not be blank")
-    private String username;
-
+    private String name;
+    
     @Email(message ="Please provide a valid email address")
     private String email;
 
-    @NotBlank(message ="First name must not be blank")
+    @NotBlank(message ="Address must not be blank")
     private String address;
 
-    @NotBlank(message ="First name must not be blank")
-    @Digits(integer = 5, fraction = 0)
+    @NotBlank(message ="Please provide digits for phone")
+    @Digits(integer = 11, fraction = 0)
     private String phone;
     
-    private boolean active;
+    @NotBlank(message ="password must not be blank")
+    private String password;
     
-    private Role role;
+    @NotBlank(message ="password confirm must not be blank")
+    private String passwordConfirm;
 }
