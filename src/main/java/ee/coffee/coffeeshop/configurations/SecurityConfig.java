@@ -31,8 +31,8 @@ public class SecurityConfig  {
                 .csrf(AbstractHttpConfigurer::disable)   // отключение банковской защиты от CSRF атак
                 .cors(AbstractHttpConfigurer::disable)   // отключение защиты от межсайтовых атак
                 .authorizeHttpRequests((request) -> {      // настройка правил доступа для различных URL-адресов
-                    request.requestMatchers("/admin/****").hasRole("ROLE_" + Role.ADMIN.name());
-                    request.requestMatchers("/user/**").hasRole("ROLE_" + Role.USER.name());
+                    request.requestMatchers("/admin/****").hasRole(Role.ADMIN.name());
+                    request.requestMatchers("/user/**").hasRole(Role.USER.name());
                     request.requestMatchers("/public/***").permitAll();
                     request.anyRequest().permitAll();
                 })
