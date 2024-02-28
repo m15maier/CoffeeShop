@@ -37,7 +37,7 @@ public class CartServiceImpl implements CartService {
         cartEntity.setUser(user);
 
 
-        Optional<Product> productOptional = productRepository.findById(Math.toIntExact(productId));
+        Optional<Product> productOptional = productRepository.findById(productId);
         if (!productOptional.isPresent()) {     // поиск продукта
             throw new EntityNotFoundException("not found");     // если не найден, то выбрасывается исключение
     }

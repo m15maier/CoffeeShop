@@ -11,11 +11,10 @@ public interface UserService {
     List<User> list();
 
     void createUser(User user) throws CoffeeShopExeption;
-
-    void changeUserRoles(User user, Map<String, String> form);
     
     User getById(Long id);
     
     void deleteUser(Long id);
+    
     void updateUser(UserDTO user) throws CoffeeShopExeption;
 }

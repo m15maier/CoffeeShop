@@ -13,11 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -28,8 +24,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public void createUser(User user) throws CoffeeShopExeption
-    {
+    public void createUser(User user) throws CoffeeShopExeption {
         checkNotEmpty(user.getEmail(), "email");
         checkNotEmpty(user.getUsername(), "name");
         checkNotEmpty(user.getPassword(), "password");
@@ -46,25 +41,10 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
     
-    private void checkNotEmpty(String value, String name) throws CoffeeShopExeption
-    {
+    private void checkNotEmpty(String value, String name) throws CoffeeShopExeption {
         if(!StringUtils.hasText(value)) {
             throw new CoffeeShopExeption("Empty value not allowed for '" + name + "'");
         }
-    }
-    
-    @Override
-    public void changeUserRoles(User user, Map<String, String> form) {
-        Set<String> roles = Arrays.stream(Role.values())
-                .map(Role::name)
-                .collect(Collectors.toSet());
-        user.setRole(Role.ADMIN);
-        for (String key : form.keySet()) {
-            if (roles.contains(key)) {
-                user.setRole(Role.ADMIN);
-            }
-        }
-        userRepository.save(user);
     }
     
     @Override
@@ -77,8 +57,7 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
     
-    @Override public void updateUser(UserDTO dto) throws CoffeeShopExeption
-    {
+    @Override public void updateUser(UserDTO dto) throws CoffeeShopExeption {
         User user = userRepository.findById(dto.getId()).orElseThrow(
             () -> new CoffeeShopExeption("User not found, id=" + dto.getId()));
         BeanUtils.copyProperties(dto, user);
@@ -89,5 +68,4 @@ public class UserServiceImpl implements UserService {
     public List<User> list() {
         return userRepository.findAll();
     }
-
 }

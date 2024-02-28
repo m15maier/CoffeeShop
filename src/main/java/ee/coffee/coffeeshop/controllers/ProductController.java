@@ -20,17 +20,14 @@ public class ProductController extends AbstractController {
     @GetMapping(value = "/")
     public String products(@RequestParam(name = "product_title", required = false) String title, Principal principal, Model model) {
         model.addAttribute("products", productService.listProducts(title));
-        model.addAttribute("user", productService.getUserByPrincipal(principal));
         model.addAttribute("searchWord", title);
-        return "products";
+        return "index";
     }
 
     @GetMapping(value = "/product/{id}")
     public String productInfo(@PathVariable Long id, Model model, Principal principal) {
         Product product = productService.getProductById(id);
-        model.addAttribute("user", productService.getUserByPrincipal(principal));
         model.addAttribute("product", product);
-        model.addAttribute("images", product.getImages());
         return "product-info";
     }
 }
