@@ -3,10 +3,7 @@ package ee.coffee.coffeeshop.serviceimpl;
 import ee.coffee.coffeeshop.entity.User;
 import ee.coffee.coffeeshop.repositories.UserRepository;
 import ee.coffee.coffeeshop.services.impl.UserServiceImpl;
-<<<<<<< HEAD
 import ee.coffee.coffeeshop.services.interfaces.CoffeeShopExeption;
-=======
->>>>>>> сделала много всего, добавила тест
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,24 +27,18 @@ public class UserServiceTest {
         private UserServiceImpl userService;
 
     @Test
-<<<<<<< HEAD
         public void createUser() throws CoffeeShopExeption {
-=======
-        public void createUser() {
->>>>>>> сделала много всего, добавила тест
             User ann = new User();
-            ann.setUsername("ann");
+            ann.setName("ann");
             ann.setEmail("ann@gmail.com");
             ann.setAddress("USA");
             ann.setPhone("1234567");
 
-<<<<<<< HEAD
             userService.createUser(ann);
             assertEquals(ann, new User());
-=======
-            User newUser = userService.createUser("ann", "ann@gmail.com","USA", "1234567");
-            assertEquals(ann, newUser);
->>>>>>> сделала много всего, добавила тест
+
+            userService.createUser(ann);
+            assertEquals(ann, new User());
 
             verify(userRepository, times(1)).save(ann);
         }
@@ -80,7 +71,7 @@ public class UserServiceTest {
     public void getByIdTest() {
 
         User jess = new User();
-        jess.setUsername("jess");
+        jess.setName("jess");
         jess.setId(8L);
 
         when(userRepository.findById(8L)).thenReturn(Optional.of(jess));  // задаётся поведение мокито для метода
