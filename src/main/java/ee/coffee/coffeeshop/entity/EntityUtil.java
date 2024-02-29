@@ -12,8 +12,5 @@ public class EntityUtil
 	public static boolean isNew(Product product) {
 		return isNew(product.getId());
 	}
-	
-	public static boolean isNew(Image image)	{
-		return isNew(image.getId());
-	}
+
 }
