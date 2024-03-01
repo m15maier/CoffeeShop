@@ -13,10 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@EnableWebSecurity  // указывает на то, что класс является конфигурацией безопасности для веб-приложения
-@Configuration      // указывает на то, что класс является конфигурационным классом
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
-@AllArgsConstructor     // конструктор со всеми полями
+@EnableWebSecurity
+@Configuration
+@AllArgsConstructor
 public class SecurityConfig  {
 
     private final UserDetailsServiceImpl userDetailsServiceImpl;
@@ -24,7 +23,7 @@ public class SecurityConfig  {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 //     метод для настройки безопасности приложения
-    @Bean   // указывает на то, что метод возвращает экземпляр объекта, который будет управлять фильтрами безопасности
+    @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)   // отключение банковской защиты от CSRF атак

@@ -11,8 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller     // создаётся контроллер и управляется спрингом
-@RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
+@Controller
+@RequiredArgsConstructor
 public class CartController extends AbstractController {
 
     static final String CART = "/user/cart";

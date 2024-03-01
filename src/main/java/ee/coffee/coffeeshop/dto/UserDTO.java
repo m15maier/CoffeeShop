@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-@Data   // getter + setter + required args + to string + equals
+@Data
 public class UserDTO {
     
     @Id

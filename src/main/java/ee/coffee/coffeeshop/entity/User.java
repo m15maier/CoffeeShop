@@ -12,10 +12,10 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Table(name = "users")
-@Data       // getter + setter + required args + to string + equals
-@Entity     // сущность jpa
+@Data
+@Entity
 public class User {
-    @Id     // первичный ключ
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private Long id;

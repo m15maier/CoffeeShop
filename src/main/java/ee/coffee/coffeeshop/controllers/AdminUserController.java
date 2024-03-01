@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-@Controller     // создаётся контроллер и управляется спрингом
-@RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
+@Controller
+@RequiredArgsConstructor
 public class AdminUserController extends AbstractController {
     
     static final String LIST = "/admin/user/list";

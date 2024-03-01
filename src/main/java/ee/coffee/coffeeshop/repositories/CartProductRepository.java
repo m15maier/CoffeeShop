@@ -4,7 +4,7 @@ import ee.coffee.coffeeshop.entity.CartProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository     // доступ к данным
+@Repository
 public interface CartProductRepository extends JpaRepository<CartProduct, Long> {
 
 }

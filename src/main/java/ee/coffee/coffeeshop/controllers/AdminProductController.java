@@ -18,8 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import static ee.coffee.coffeeshop.services.impl.UserDetailsServiceImpl.getUser;
 
-@Controller     // создаётся контроллер и управляется спрингом
-@RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
+@Controller
+@RequiredArgsConstructor
 public class AdminProductController extends AbstractController {
 
     static final String LIST = "/admin/product/list";

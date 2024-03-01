@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
-@Controller     // создаётся контроллер и управляется спрингом
-@RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
+@Controller
+@RequiredArgsConstructor
 public class ProductController extends AbstractController {
 
     private final ProductService productService;

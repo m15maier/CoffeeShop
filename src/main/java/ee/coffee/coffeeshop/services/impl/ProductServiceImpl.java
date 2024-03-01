@@ -22,7 +22,7 @@ import java.util.List;
 @Slf4j
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductRepository productRepository;  // связующий элемент между базой
+    private final ProductRepository productRepository;
     private final ImageRepository imageRepository;
     
     @Override
@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
     throws CoffeeShopExeption {
         product.setUser(user);
         checkNotEmpty(product.getTitle(), "title");
-        // надо сохранить текущий previewImage, если не указали новый
+        // надо сохранить текущий previewImage, если не указан новый
         Image previewImage = toImageEntity(previewImageFile);
         if(previewImage != null) {
             product.setPreviewImage(imageRepository.save(previewImage));

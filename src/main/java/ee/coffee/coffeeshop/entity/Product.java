@@ -19,8 +19,8 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 @Getter
-@Setter    // getter + setter + required args + to string + equals
-@Entity     // сущность jpa
+@Setter
+@Entity
 public class Product {
 
     @Id

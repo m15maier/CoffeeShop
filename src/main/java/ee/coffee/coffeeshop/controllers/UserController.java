@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@Controller     // создаётся контроллер и управляется спрингом
-@RequiredArgsConstructor    // позволит получить конструктор с параметром для каждого поля
+@Controller
+@RequiredArgsConstructor
 public class UserController extends AbstractController {
 
     private final UserService userService;

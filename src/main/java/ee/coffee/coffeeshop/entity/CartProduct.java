@@ -10,8 +10,8 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Data       // getter + setter + required args + to string + equals
-@Entity     // сущность jpa
+@Data
+@Entity
 public class CartProduct {
 
     @Id
