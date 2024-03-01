@@ -24,7 +24,7 @@
     <body>
 
     <!-- https://getbootstrap.com/docs/5.0/components/navbar/ -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/">CoffeeShop</a>
 

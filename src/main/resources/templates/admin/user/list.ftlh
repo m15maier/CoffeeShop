@@ -35,5 +35,5 @@
         </#list>
         </tbody>
     </table>
-    <a type="button" href="/admin/product/edit/0" class="btn btn-success">Add product</a>
+<#--    <a type="button" href="/admin/product/edit/0" class="btn btn-success">Add product</a>-->
 </@layout>

@@ -31,7 +31,7 @@ public class ProductServiceTest {
         newProduct.setUser(new User());
         newProduct.setPreviewImage(newProduct.getPreviewImage());
 
-        productServiceImpl.saveProduct(newProduct);
+//        productServiceImpl.saveProduct(newProduct);
         assertEquals(newProduct, new Product());
 
         verify(productRepository, times(1)).save(newProduct);

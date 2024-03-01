@@ -15,14 +15,14 @@
         <tbody>
         <#list list as product>
             <tr>
-                <td class="text-end text-secondary">${product?index + 1}</td>
+                <td class="text-end text-dark">${product?index + 1}</td>
                 <td>${product.title!}</td>
                 <td class="text-end" nowrap>${product.price!"0.00"} €</td>
                 <td nowrap>${product.size!}</td>
                 <td><small>${product.description!}</small></td>
                 <td><@image image=product.previewImage!/></td>
                 <td class="text-end">
-                    <a href="/admin/product/edit/${product.id}" type="button" class="btn btn-primary">Edit</a>
+                    <a href="/admin/product/edit/${product.id}" type="button" class="btn btn-dark">Edit</a>
                     <a href="javascript:confirmDelete('/admin/product/delete/${product.id}')" type="button" class="btn btn-danger">Delete</a>
                 </td>
             </tr>

@@ -23,13 +23,9 @@
                         </#list>
                     </select>
                 </div>
-<#--                <div class="mb-3">-->
-<#--                    <input class="form-check-input" type="checkbox" value="true" name="active" id="active" ${user.active? string('checked', '')}>-->
-<#--                    <label class="form-check-label" for="active">Active</label>-->
-<#--                </div>-->
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a href="/admin/user/list" type="button" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-dark">Save</button>
+                    <a href="/admin/user/list" type="button" class="btn btn-dark">Cancel</a>
                 </div>
             </form>
         </div>

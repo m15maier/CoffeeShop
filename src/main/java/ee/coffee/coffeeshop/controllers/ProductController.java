@@ -23,10 +23,10 @@ public class ProductController extends AbstractController {
         return "index";
     }
 
-    @GetMapping(value = "/product/{id}")
-    public String productInfo(@PathVariable Long id, Model model, Principal principal) {
-        Product product = productService.getProductById(id);
-        model.addAttribute("product", product);
-        return "product-info";
-    }
+//    @GetMapping(value = "/product/{id}")
+//    public String productInfo(@PathVariable Long id, Model model, Principal principal) {
+//        Product product = productService.getProductById(id);
+//        model.addAttribute("product", product);
+//        return "product-info";
+//    }
 }

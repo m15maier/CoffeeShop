@@ -21,7 +21,7 @@
                     <input type="text" class="form-control" name="address" placeholder="address">
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary mb-3 w-100">Sign up</button>
+                    <button type="submit" class="btn btn-dark mb-3 w-100">Sign up</button>
                 </div>
             </form>
         </div>

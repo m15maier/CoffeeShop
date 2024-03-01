@@ -1,7 +1,10 @@
 <@layout>
     <div class="row">
+        <br>
+        <h1>All Products</h1>
+        <br>
         <#list products as product>
-            <div class="col-sm-4">
+            <div class="col">
                 <div class="card" style="width: 18rem;">
                     <div class="p-3">
                         <@image image=product.previewImage!/>
@@ -22,7 +25,7 @@
                                 <input type="number" class="form-control" name="quantity" placeholder="1" value="1" step="1">
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-primary">Add to cart</button>
+                                <button type="submit" class="btn btn-dark">Add to cart</button>
                             </div>
                         </form>
                     </div>

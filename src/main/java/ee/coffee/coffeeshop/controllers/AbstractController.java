@@ -13,9 +13,9 @@ import java.util.List;
 public abstract class AbstractController {
     static final String ATTR_ERROR_MESSAGE = "errorMessage";
     
-    /**
-     * attribute for binding errors (List<ObjectError>)
-     */
+//
+//    attribute for binding errors (List<ObjectError>)
+//
     static final String ATTR_ERRORS = "errors";
     
     static final String ATTR_INFO_MESSAGE = "infoMessage";
@@ -26,10 +26,10 @@ public abstract class AbstractController {
         model.addAttribute(ATTR_ERROR_MESSAGE, ex.getMessage());
     }
     
-    protected void setInfoMessage(Model model, Exception ex) {
-        model.addAttribute(ATTR_INFO_MESSAGE, ex.getMessage());
-    }
-    
+//    protected void setInfoMessage(Model model, Exception ex) {
+//        model.addAttribute(ATTR_INFO_MESSAGE, ex.getMessage());
+//    }
+//
     protected void setList(Model model, List<?> list) {
         model.addAttribute(ATTR_LIST, list);
     }
