@@ -28,9 +28,10 @@ public class ProductServiceTest {
         Product newProduct = new Product();
         newProduct.setTitle("New Coffee");
         newProduct.setId(9L);
+        newProduct.setUser(new User());
+        newProduct.setPreviewImage(newProduct.getPreviewImage());
 
-//
-//        productServiceImpl.saveProduct(newProduct);
+        productServiceImpl.saveProduct(newProduct);
         assertEquals(newProduct, new Product());
 
         verify(productRepository, times(1)).save(newProduct);
